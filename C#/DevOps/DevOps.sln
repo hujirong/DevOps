@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{02FE9C30-F64A-413B-A321-12524BDDA754}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHub", "GitHub\GitHub.csproj", "{2731DA62-5946-42AA-8ABF-C334F1F1508B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nexus", "Nexus\Nexus.csproj", "{13018440-6874-4356-B8A6-C6B55956F0D9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RESTLibrary", "RESTLibrary\RESTLibrary.csproj", "{D910C3F4-0A74-4E0F-85A5-454987CDCB64}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2731DA62-5946-42AA-8ABF-C334F1F1508B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2731DA62-5946-42AA-8ABF-C334F1F1508B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2731DA62-5946-42AA-8ABF-C334F1F1508B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2731DA62-5946-42AA-8ABF-C334F1F1508B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13018440-6874-4356-B8A6-C6B55956F0D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13018440-6874-4356-B8A6-C6B55956F0D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13018440-6874-4356-B8A6-C6B55956F0D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13018440-6874-4356-B8A6-C6B55956F0D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D910C3F4-0A74-4E0F-85A5-454987CDCB64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D910C3F4-0A74-4E0F-85A5-454987CDCB64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D910C3F4-0A74-4E0F-85A5-454987CDCB64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D910C3F4-0A74-4E0F-85A5-454987CDCB64}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
