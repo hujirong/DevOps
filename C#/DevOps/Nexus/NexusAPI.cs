@@ -141,6 +141,21 @@ class NexusAPI
         Console.WriteLine("Response received: {0}", response.ResponseStatus);
     }
 
+    /// <summary>
+    /// Searches the metadata.
+    /// </summary>
+    /// <returns></returns>
+    public List<NexusArtifact> searchMetadata()
+    {
+        RestRequest request = new RestRequest("/search/m2/ngfreeform", Method.GET);
+        request.RequestFormat = RestSharp.DataFormat.Json;
+        request.AddHeader("Accept", "application/json");
+        request.AddParameter("p", "environment");
+        request.AddParameter("t", "equal");
+        request.AddParameter("v", "DEV");
+        return this.restSharpAPI.Execute<List<NexusArtifact>>(this.client, request);
+    }
+
     static void Main(string[] args)
     {
         try
@@ -175,9 +190,21 @@ class NexusAPI
             }
 
             //nexusAPI.uploadArtifact();
-            nexusAPI.uploadArtifact1();
+            //nexusAPI.uploadArtifact1();
             //nexusAPI.uploadArtifact2();
             //nexusAPI.uploadArtifact3();
+
+            List<NexusArtifact> artifacts = new List<NexusArtifact>();
+            artifacts = nexusAPI.searchMetadata();
+            if (artifacts == null)
+            {
+                Console.WriteLine("artifacts is null");
+                Console.ReadKey(true);
+                Environment.Exit(1);
+            }
+            else {
+                Console.WriteLine("Size of repos: {0}", artifacts.Count);                
+            }
 
             Console.ReadKey(true);
         }

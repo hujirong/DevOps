@@ -1,12 +1,20 @@
-﻿namespace DevOps
+﻿using RestSharp.Deserializers;
+
+namespace DevOps
 {
+    /// <summary>
+    /// Search result from http://localhost:8060/nexus/service/local/search/m2/ngfreeform?p=environment&t=equal&v=DEV
+    /// </summary>
+    [DeserializeAs(Name = "artifact")]
     class NexusArtifact
     {
-        public string name { get; set; }
+        public string groupId { get; set; }
+        public string artifactId { get; set; }
+        public string version { get; set; }
 
         public override string ToString()
         {
-            string s = "name=" + name;
+            string s = "groupId=" + groupId + " artifactId=" + artifactId + " version=" + version;
             return s;
         }
     }
