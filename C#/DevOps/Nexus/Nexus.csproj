@@ -36,6 +36,10 @@
     <StartupObject>NexusAPI</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="GitVersionCore, Version=3.5.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GitVersion.3.5.4\lib\Net45\GitVersionCore.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="RestSharp">
       <HintPath>..\packages\RestSharp.105.2.3\lib\net452\RestSharp.dll</HintPath>
     </Reference>
@@ -56,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RESTLibrary\RESTLibrary.csproj">

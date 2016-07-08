@@ -142,7 +142,8 @@ class NexusAPI
     }
 
     /// <summary>
-    /// Searches the metadata.
+    /// http://localhost:8060/nexus/nexus-custom-metadata-plugin/m2/docs/path__search_m2_freeform.html
+    /// http://localhost:8060/nexus/service/local/search/m2/ngfreeform?p=environment&t=equal&v=DEV
     /// </summary>
     /// <returns></returns>
     public List<NexusArtifact> searchMetadata()
