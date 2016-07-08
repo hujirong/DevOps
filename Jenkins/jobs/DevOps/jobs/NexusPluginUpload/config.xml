@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties/>
+  <scm class="hudson.scm.NullSCM"/>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <sp.sd.uploadartifactstonexus.UploadArtifactsToNexus plugin="upload-artifacts-to-nexus@1.1">
+      <protocol>http</protocol>
+      <nexusUrl>localhost:8081/nexus/</nexusUrl>
+      <nexusUser>admin</nexusUser>
+      <nexusPassword>whLfMEmPLYnofIh+wy3OYbzUnHYFUvjPc2uGDrjoPmg=</nexusPassword>
+      <groupId>devops</groupId>
+      <artifactId>support-20160216-131215-1.zip</artifactId>
+      <version>1.0</version>
+      <packaging>zip</packaging>
+      <repository>Releases</repository>
+      <file>C:\Temp\Nexus\support-20160216-131215-1.zip</file>
+    </sp.sd.uploadartifactstonexus.UploadArtifactsToNexus>
+  </builders>
+  <publishers/>
+  <buildWrappers/>
+</project>

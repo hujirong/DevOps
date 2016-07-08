@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<flow-definition plugin="workflow-job@2.1">
+  <actions/>
+  <description>A pipeline to build and deploy Sample project.</description>
+  <keepDependencies>false</keepDependencies>
+  <properties/>
+  <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps@2.2">
+    <script>node {
+   stage &apos;Build&apos;
+   build &apos;BuildSample&apos;
+   stage &apos;Approve DEV&apos;
+   input &apos;Approve deploy to DEV?&apos;
+   stage &apos;Deploy to DEV&apos;
+   build &apos;DeploySampleToDEV&apos;
+}</script>
+    <sandbox>true</sandbox>
+  </definition>
+  <triggers/>
+</flow-definition>

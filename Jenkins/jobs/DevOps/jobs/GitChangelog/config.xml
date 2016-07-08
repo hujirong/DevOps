@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties/>
+  <scm class="hudson.plugins.git.GitSCM" plugin="git@2.4.0">
+    <configVersion>2</configVersion>
+    <userRemoteConfigs>
+      <hudson.plugins.git.UserRemoteConfig>
+        <url>http://github.otpp.com/DevOps/Sample.git</url>
+        <credentialsId>ef724ec4-c688-4063-9e50-2c57ce6d1f61</credentialsId>
+      </hudson.plugins.git.UserRemoteConfig>
+    </userRemoteConfigs>
+    <branches>
+      <hudson.plugins.git.BranchSpec>
+        <name>*/master</name>
+      </hudson.plugins.git.BranchSpec>
+    </branches>
+    <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+    <submoduleCfg class="list"/>
+    <extensions/>
+  </scm>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders/>
+  <publishers>
+    <org.jenkinsci.plugins.gitchangelog.GitChangelogRecorder plugin="git-changelog@1.10">
+      <config>
+        <useConfigFile>false</useConfigFile>
+        <configFile>git-changelog-settings.json</configFile>
+        <createFileUseTemplateFile>false</createFileUseTemplateFile>
+        <createFileTemplateFile></createFileTemplateFile>
+        <createFileUseTemplateContent>false</createFileUseTemplateContent>
+        <createFileTemplateContent></createFileTemplateContent>
+        <mediaWikiUseTemplateFile>false</mediaWikiUseTemplateFile>
+        <mediaWikiTemplateFile></mediaWikiTemplateFile>
+        <mediaWikiUseTemplateContent>false</mediaWikiUseTemplateContent>
+        <mediaWikiTemplateContent></mediaWikiTemplateContent>
+        <showSummaryUseTemplateFile>false</showSummaryUseTemplateFile>
+        <showSummaryTemplateFile></showSummaryTemplateFile>
+        <showSummaryUseTemplateContent>false</showSummaryUseTemplateContent>
+        <showSummaryTemplateContent></showSummaryTemplateContent>
+        <fromType>firstCommit</fromType>
+        <fromReference></fromReference>
+        <toType>master</toType>
+        <toReference></toReference>
+        <dateFormat>YYYY-MM-dd HH:mm:ss</dateFormat>
+        <timeZone>UTC</timeZone>
+        <ignoreCommitsIfMessageMatches>^\[maven-release-plugin\].*|^\[Gradle Release Plugin\].*|^Merge.*</ignoreCommitsIfMessageMatches>
+        <useJira>false</useJira>
+        <jiraServer></jiraServer>
+        <jiraIssuePattern>\b[a-zA-Z]([a-zA-Z]+)-([0-9]+)\b</jiraIssuePattern>
+        <jiraUsername></jiraUsername>
+        <jiraPassword></jiraPassword>
+        <useGitHub>false</useGitHub>
+        <gitHubApi></gitHubApi>
+        <gitHubIssuePattern>#([0-9]+)</gitHubIssuePattern>
+        <noIssueName>No issue</noIssueName>
+        <untaggedName>Unreleased</untaggedName>
+        <useReadableTagName>true</useReadableTagName>
+        <readableTagName>/([^/]+?)$</readableTagName>
+        <useMediaWiki>false</useMediaWiki>
+        <mediaWikiUsername></mediaWikiUsername>
+        <mediaWikiPassword></mediaWikiPassword>
+        <mediaWikiTitle></mediaWikiTitle>
+        <mediaWikiUrl></mediaWikiUrl>
+        <useFile>true</useFile>
+        <file>CHANGELOG.txt</file>
+        <customIssues>
+          <org.jenkinsci.plugins.gitchangelog.config.CustomIssue>
+            <name></name>
+            <pattern></pattern>
+            <link></link>
+          </org.jenkinsci.plugins.gitchangelog.config.CustomIssue>
+          <org.jenkinsci.plugins.gitchangelog.config.CustomIssue>
+            <name></name>
+            <pattern></pattern>
+            <link></link>
+          </org.jenkinsci.plugins.gitchangelog.config.CustomIssue>
+        </customIssues>
+        <showSummary>true</showSummary>
+      </config>
+    </org.jenkinsci.plugins.gitchangelog.GitChangelogRecorder>
+  </publishers>
+  <buildWrappers/>
+</project>

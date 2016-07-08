@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description>Example Project</description>
+  <keepDependencies>false</keepDependencies>
+  <properties/>
+  <scm class="hudson.plugins.git.GitSCM" plugin="git@2.4.4">
+    <configVersion>2</configVersion>
+    <userRemoteConfigs>
+      <hudson.plugins.git.UserRemoteConfig>
+        <url>//wsdashdevapp1.otpp.com/Repo.git</url>
+        <credentialsId>ef724ec4-c688-4063-9e50-2c57ce6d1f61</credentialsId>
+      </hudson.plugins.git.UserRemoteConfig>
+    </userRemoteConfigs>
+    <branches>
+      <hudson.plugins.git.BranchSpec>
+        <name>*/master</name>
+      </hudson.plugins.git.BranchSpec>
+    </branches>
+    <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+    <submoduleCfg class="list"/>
+    <extensions/>
+  </scm>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.plugins.msbuild.MsBuildBuilder plugin="msbuild@1.24">
+      <msBuildName>(Default)</msBuildName>
+      <msBuildFile>${WORKSPACE}\Logger\NuGet.Logger.NET30\NuGet.Logger.NET30.csproj</msBuildFile>
+      <cmdLineArgs></cmdLineArgs>
+      <buildVariablesAsProperties>false</buildVariablesAsProperties>
+      <continueOnBuildFailure>false</continueOnBuildFailure>
+      <unstableIfWarnings>false</unstableIfWarnings>
+    </hudson.plugins.msbuild.MsBuildBuilder>
+    <hudson.plugins.msbuild.MsBuildBuilder plugin="msbuild@1.24">
+      <msBuildName>(Default)</msBuildName>
+      <msBuildFile>${WORKSPACE}\Logger\UnitTest\UnitTest20.csproj</msBuildFile>
+      <cmdLineArgs></cmdLineArgs>
+      <buildVariablesAsProperties>false</buildVariablesAsProperties>
+      <continueOnBuildFailure>false</continueOnBuildFailure>
+      <unstableIfWarnings>false</unstableIfWarnings>
+    </hudson.plugins.msbuild.MsBuildBuilder>
+    <hudson.tasks.BatchFile>
+      <command>del results.trx&#xd;
+&quot;C:\Program Files (x86)\Microsoft Visual Studio 11.0\Common7\IDE\MSTest.exe&quot; /testcontainer:C:\Jenkins\jobs\Logger\workspace\Logger\UnitTest\bin\Debug\UnitTest20.dll /resultsfile:results.trx</command>
+    </hudson.tasks.BatchFile>
+    <hudson.tasks.BatchFile>
+      <command>del results.trx.htm&#xd;
+&quot;C:\trx2html\trx2html.exe&quot; C:\Jenkins\jobs\Logger\workspace\results.trx</command>
+    </hudson.tasks.BatchFile>
+  </builders>
+  <publishers>
+    <hudson.tasks.ArtifactArchiver>
+      <artifacts>Logger/NuGet.Logger.NET20/bin/Debug/</artifacts>
+      <allowEmptyArchive>false</allowEmptyArchive>
+      <onlyIfSuccessful>false</onlyIfSuccessful>
+      <fingerprint>false</fingerprint>
+      <defaultExcludes>true</defaultExcludes>
+      <caseSensitive>true</caseSensitive>
+    </hudson.tasks.ArtifactArchiver>
+    <hudson.plugins.mstest.MSTestPublisher plugin="mstest@0.19">
+      <testResultsFile>results.trx</testResultsFile>
+      <buildTime>0</buildTime>
+      <failOnError>false</failOnError>
+      <keepLongStdio>true</keepLongStdio>
+    </hudson.plugins.mstest.MSTestPublisher>
+  </publishers>
+  <buildWrappers/>
+</project>

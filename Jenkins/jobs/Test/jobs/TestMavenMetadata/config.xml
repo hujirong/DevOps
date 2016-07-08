@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <eu.markov.jenkins.plugin.mvnmeta.MavenMetadataParameterDefinition plugin="maven-metadata-plugin@1.5.0">
+          <name>githubSuspsendInactiveADAccounts</name>
+          <description></description>
+          <repoBaseUrl>http://invnexus.dev.otpp.com/nexus/content/repositories/otpp-releases</repoBaseUrl>
+          <groupId>otpp.devops</groupId>
+          <artifactId>githubSuspsendInactiveADAccounts</artifactId>
+          <packaging>zip</packaging>
+          <classifier></classifier>
+          <defaultValue></defaultValue>
+          <versionFilter>1.0.1</versionFilter>
+          <sortOrder>DESC</sortOrder>
+          <maxVersions></maxVersions>
+          <currentArtifactInfoUrl></currentArtifactInfoUrl>
+          <currentArtifactInfoLabel></currentArtifactInfoLabel>
+          <currentArtifactInfoPattern></currentArtifactInfoPattern>
+          <credentialsId>ef724ec4-c688-4063-9e50-2c57ce6d1f61</credentialsId>
+        </eu.markov.jenkins.plugin.mvnmeta.MavenMetadataParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+  </properties>
+  <scm class="hudson.scm.NullSCM"/>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.BatchFile>
+      <command>set</command>
+    </hudson.tasks.BatchFile>
+  </builders>
+  <publishers/>
+  <buildWrappers/>
+</project>

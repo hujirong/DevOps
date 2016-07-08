@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<sync-branches plugin="multi-branch-project-plugin@0.4.1">
+  <actions/>
+  <result>
+    <name>SUCCESS</name>
+    <ordinal>0</ordinal>
+    <color>BLUE</color>
+    <completeBuild>true</completeBuild>
+  </result>
+  <durations>
+    <long>337</long>
+  </durations>
+  <timestamp>1457023388043</timestamp>
+  <duration>337</duration>
+</sync-branches>

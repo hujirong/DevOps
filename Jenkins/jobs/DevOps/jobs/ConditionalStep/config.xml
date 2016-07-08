@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description>Check source check out from GitHub.</description>
+  <keepDependencies>false</keepDependencies>
+  <properties/>
+  <scm class="hudson.plugins.git.GitSCM" plugin="git@2.4.0">
+    <configVersion>2</configVersion>
+    <userRemoteConfigs>
+      <hudson.plugins.git.UserRemoteConfig>
+        <url>http://github.otpp.com/DevOps/Jenkins_Sanity_Test.git</url>
+        <credentialsId>ef724ec4-c688-4063-9e50-2c57ce6d1f61</credentialsId>
+      </hudson.plugins.git.UserRemoteConfig>
+    </userRemoteConfigs>
+    <branches>
+      <hudson.plugins.git.BranchSpec>
+        <name>DEVOP*</name>
+      </hudson.plugins.git.BranchSpec>
+    </branches>
+    <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+    <submoduleCfg class="list"/>
+    <extensions>
+      <hudson.plugins.git.extensions.impl.BuildChooserSetting>
+        <buildChooser class="hudson.plugins.git.util.InverseBuildChooser"/>
+      </hudson.plugins.git.extensions.impl.BuildChooserSetting>
+    </extensions>
+  </scm>
+  <assignedNode>master</assignedNode>
+  <canRoam>false</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.BatchFile>
+      <command>echo %GIT_BRANCH%</command>
+    </hudson.tasks.BatchFile>
+    <org.jenkinsci.plugins.conditionalbuildstep.singlestep.SingleConditionalBuilder plugin="conditional-buildstep@1.3.3">
+      <condition class="org.jenkins_ci.plugins.run_condition.core.ExpressionCondition" plugin="run-condition@1.0">
+        <expression>/.*\/dev.*/i</expression>
+        <label>${ENV,var=&quot;GIT_BRANCH&quot;} </label>
+      </condition>
+      <buildStep class="hudson.plugins.msbuild.MsBuildBuilder" plugin="msbuild@1.24">
+        <msBuildName>MSBuild 14.0</msBuildName>
+        <msBuildFile>Jenkins_Sanity_Test/Jenkins_Sanity_Test.sln</msBuildFile>
+        <cmdLineArgs>/p:Configuration=Debug</cmdLineArgs>
+        <buildVariablesAsProperties>false</buildVariablesAsProperties>
+        <continueOnBuildFailure>false</continueOnBuildFailure>
+        <unstableIfWarnings>false</unstableIfWarnings>
+      </buildStep>
+      <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$Fail" plugin="run-condition@1.0"/>
+    </org.jenkinsci.plugins.conditionalbuildstep.singlestep.SingleConditionalBuilder>
+    <org.jenkinsci.plugins.conditionalbuildstep.singlestep.SingleConditionalBuilder plugin="conditional-buildstep@1.3.3">
+      <condition class="org.jenkins_ci.plugins.run_condition.core.ExpressionCondition" plugin="run-condition@1.0">
+        <expression>.*\/Rel.*</expression>
+        <label>${ENV,var=&quot;GIT_BRANCH&quot;} </label>
+      </condition>
+      <buildStep class="hudson.plugins.msbuild.MsBuildBuilder" plugin="msbuild@1.24">
+        <msBuildName>MSBuild 14.0</msBuildName>
+        <msBuildFile>Jenkins_Sanity_Test/Jenkins_Sanity_Test.sln</msBuildFile>
+        <cmdLineArgs>/p:Configuration=Release</cmdLineArgs>
+        <buildVariablesAsProperties>false</buildVariablesAsProperties>
+        <continueOnBuildFailure>false</continueOnBuildFailure>
+        <unstableIfWarnings>false</unstableIfWarnings>
+      </buildStep>
+      <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$Fail" plugin="run-condition@1.0"/>
+    </org.jenkinsci.plugins.conditionalbuildstep.singlestep.SingleConditionalBuilder>
+    <org.jenkinsci.plugins.conditionalbuildstep.singlestep.SingleConditionalBuilder plugin="conditional-buildstep@1.3.3">
+      <condition class="org.jenkins_ci.plugins.run_condition.core.ExpressionCondition" plugin="run-condition@1.0">
+        <expression>.*\/dev.*</expression>
+        <label>${ENV,var=&quot;GIT_BRANCH&quot;} </label>
+      </condition>
+      <buildStep class="org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerBuilder" plugin="artifactdeployer@0.33">
+        <entry>
+          <includes>Jenkins_Sanity_Test\Jenkins_Sanity_Test\obj\Debug\*.dll</includes>
+          <basedir></basedir>
+          <excludes></excludes>
+          <remote>\\I6329\Temp\Jenkins</remote>
+          <flatten>false</flatten>
+          <deleteRemote>false</deleteRemote>
+          <deleteRemoteArtifacts>false</deleteRemoteArtifacts>
+          <deleteRemoteArtifactsByScript>false</deleteRemoteArtifactsByScript>
+          <failNoFilesDeploy>false</failNoFilesDeploy>
+        </entry>
+      </buildStep>
+      <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$Fail" plugin="run-condition@1.0"/>
+    </org.jenkinsci.plugins.conditionalbuildstep.singlestep.SingleConditionalBuilder>
+  </builders>
+  <publishers/>
+  <buildWrappers/>
+</project>
