@@ -52,6 +52,7 @@
     <Compile Include="GitHubOrg.cs" />
     <Compile Include="GitHubRepo.cs" />
     <Compile Include="GitHubTeam.cs" />
+    <Compile Include="GitHubCommit.cs" />
     <Compile Include="GitHubUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

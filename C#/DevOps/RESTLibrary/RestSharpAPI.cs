@@ -74,7 +74,7 @@ namespace DevOps
                 var restSharpAPIException = new ApplicationException(message, response.ErrorException);
                 throw restSharpAPIException;
             }
-            Console.WriteLine("Response received: {0}", response.Data);        
+            //Console.WriteLine("Response received: {0}", response.Data);        
             return response.Data;
         }
 
