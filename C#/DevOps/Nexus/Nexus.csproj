@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="NexusAPI.cs" />
+    <Compile Include="NexusContent.cs" />
     <Compile Include="NexusArtifact.cs" />
     <Compile Include="NexusRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

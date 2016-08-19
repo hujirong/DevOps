@@ -11,10 +11,11 @@ namespace DevOps
         public string groupId { get; set; }
         public string artifactId { get; set; }
         public string version { get; set; }
+        public string latestRelease { get; set; }
 
         public override string ToString()
         {
-            string s = "groupId=" + groupId + " artifactId=" + artifactId + " version=" + version;
+            string s = "groupId=" + groupId + " artifactId=" + artifactId + " version=" + version + " latestRelease=" + latestRelease;
             return s;
         }
     }
