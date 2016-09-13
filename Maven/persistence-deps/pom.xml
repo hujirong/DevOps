@@ -1,0 +1,35 @@
+<project>
+<modelVersion>4.0.0</modelVersion>
+  <groupId>org.sonatype.mavenbook</groupId>
+  <artifactId>persistence-deps</artifactId>
+  <version>1.0</version>
+<packaging>pom</packaging>
+  <dependencies>
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate</artifactId>
+      <version>${hibernateVersion}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-annotations</artifactId>
+      <version>${hibernateAnnotationsVersion}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-hibernate3</artifactId>
+      <version>${springVersion}</version>
+    </dependency>
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>${mysqlVersion}</version>
+    </dependency>
+  </dependencies>
+<properties>
+    <mysqlVersion>(5.1,)</mysqlVersion>
+    <springVersion>(4.2.0,)</springVersion>
+    <hibernateVersion>5.2.2.Final</hibernateVersion>
+    <hibernateAnnotationsVersion>3.5.6.Final</hibernateAnnotationsVersion>
+  </properties>
+</project>
