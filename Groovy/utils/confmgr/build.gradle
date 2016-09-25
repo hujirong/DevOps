@@ -1,0 +1,14 @@
+
+apply plugin: 'application'
+apply plugin: 'maven'
+
+applicationName = 'confmgr'
+mainClassName = 'com.otpp.devops.utils.Dummy'
+
+version = 1.0
+group = 'com.otpp.devops.utils'
+
+dependencies {
+	
+	compile files('C:/Users/huj/devops/groovy-ldap.jar')
+}

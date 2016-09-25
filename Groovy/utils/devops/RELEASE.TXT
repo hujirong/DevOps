@@ -1,0 +1,12 @@
+This is release notes of UrbanCode utilities.
+
+1.3.4
+Bug in udeploy-update Java program
+UdeployUpdate supports -U parameter to let user define user, if user defines -U , then 
+password will be selected from property .password in devops.properties file
+
+UrbanCode UDeployUpdate not supporting concurrent calls
+UdeployUpdate calls REST API directly instead of calling udclient CLI
+
+1.4.1
+Support Nexus 2

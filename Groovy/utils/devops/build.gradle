@@ -1,0 +1,20 @@
+apply plugin: 'maven'
+
+applicationName = 'devops'
+mainClassName = 'com.otpp.devops.utils.Dummy'
+
+version = '1.4.1'
+group = 'com.otpp.devops.utils'
+
+dependencies {
+    compile 'org.codehaus.groovy.modules.http-builder:http-builder:0.7.1'
+    compile 'commons-codec:commons-codec:1.9'
+    compile 'jline:jline:2.12'
+    compile 'com.aestasit.infrastructure.sshoogr:sshoogr:0.9.16'
+    compile 'com.beust:jcommander:1.35'
+	compile 'org.eclipse.mylyn.github:org.eclipse.egit.github.core:2.1.5'
+	compile files('C:/Users/huj/devops/groovy-ldap.jar')
+	
+    compile project(':confmgr')
+}
+
