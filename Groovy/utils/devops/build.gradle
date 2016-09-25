@@ -1,7 +1,7 @@
 apply plugin: 'maven'
 
 applicationName = 'devops'
-mainClassName = 'com.otpp.devops.utils.Dummy'
+mainClassName = 'com.devops.utils.Dummy'
 
 version = '1.4.1'
 group = 'com.otpp.devops.utils'

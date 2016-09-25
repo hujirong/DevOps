@@ -9,7 +9,7 @@ import org.apache.http.HttpRequest
 import org.apache.http.HttpRequestInterceptor
 import org.apache.http.protocol.HttpContext
 
-import com.otpp.devops.utils.ConfigFile
+import com.devops.utils.ConfigFile
 
 /**
  * Use UrbanCode deploy REST API

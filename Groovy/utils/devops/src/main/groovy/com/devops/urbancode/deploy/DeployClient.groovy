@@ -3,8 +3,8 @@ package com.devops.urbancode.deploy
 import groovy.json.JsonSlurper
 import groovy.util.logging.Slf4j
 
-import com.otpp.devops.Env;
-import com.otpp.devops.utils.ConfigFile;
+import com.devops.Env;
+import com.devops.utils.ConfigFile;
 
 /**
  * Access UrbanCode deploy with REST API

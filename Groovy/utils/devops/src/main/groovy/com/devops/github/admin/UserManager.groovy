@@ -14,11 +14,11 @@ import com.beust.jcommander.JCommander
 import com.beust.jcommander.Parameter
 import com.beust.jcommander.ParameterException
 import com.beust.jcommander.Parameters
-import com.otpp.devops.utils.ADUtilities
-import com.otpp.devops.utils.ConfigFile
-import com.otpp.devops.utils.ConfigManager
-import com.otpp.devops.urbancode.admin.UdeployUpdate
-import com.otpp.devops.urbancode.deploy.DeployClient
+import com.devops.utils.ADUtilities
+import com.devops.utils.ConfigFile
+import com.devops.utils.ConfigManager
+import com.devops.urbancode.admin.UdeployUpdate
+import com.devops.urbancode.deploy.DeployClient
 import groovy.json.JsonSlurper
 import org.apache.directory.groovyldap.LDAP
 import org.apache.directory.groovyldap.SearchScope

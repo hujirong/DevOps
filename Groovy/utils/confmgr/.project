@@ -1,24 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>confmgr</name>
-	<comment></comment>
-	<projects>
-	</projects>
-	<buildSpec>
-		<buildCommand>
-			<name>org.eclipse.jdt.core.javabuilder</name>
-			<arguments>
-			</arguments>
-		</buildCommand>
-	</buildSpec>
-	<natures>
-		<nature>org.eclipse.jdt.groovy.core.groovyNature</nature>
-		<nature>org.eclipse.jdt.core.javanature</nature>
-	</natures>
 	<filteredResources>
 		<filter>
 			<id>1454452268169</id>
-			<name></name>
+			<name/>
 			<type>26</type>
 			<matcher>
 				<id>org.eclipse.ui.ide.multiFilter</id>
@@ -27,7 +12,7 @@
 		</filter>
 		<filter>
 			<id>1454452268184</id>
-			<name></name>
+			<name/>
 			<type>26</type>
 			<matcher>
 				<id>org.eclipse.ui.ide.multiFilter</id>
@@ -35,4 +20,18 @@
 			</matcher>
 		</filter>
 	</filteredResources>
+	<name>confmgr</name>
+	<comment/>
+	<projects/>
+	<natures>
+		<nature>org.eclipse.jdt.groovy.core.groovyNature</nature>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+	</natures>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments/>
+		</buildCommand>
+	</buildSpec>
+	<linkedResources/>
 </projectDescription>
