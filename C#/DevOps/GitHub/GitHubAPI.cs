@@ -184,7 +184,7 @@ namespace DevOps
                     foreach (GitHubCommit item in commits) // Loop through List with foreach.
                     {
                         Console.WriteLine("commit info: {0} \n", item.sha);
-                        createText = createText + "\nChange: " + item.commit.message + "\n";
+                        createText = createText + "\nChange: " + item.message + "\n";
                         GitHubCommit commit = gitHubAPI.GetCommit(org, repo.name, item.sha);
                         createText = createText + commit.ToString();
                     }
