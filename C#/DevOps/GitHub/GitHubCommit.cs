@@ -1,15 +1,17 @@
 namespace DevOps
 {
-
+    // this may not be right
     class GitHubCommit
     {
-                public string id { get; set; }        
+        public string sha { get; set; }        
+        public string message { get; set; }
 
         public override string ToString()
         {
-            string s = "id=" + id;
+            string s = "sha=" + sha + "message=" + message;
             return s;
         }
     }
 
 }
+
