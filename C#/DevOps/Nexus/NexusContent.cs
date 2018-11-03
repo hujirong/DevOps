@@ -8,14 +8,15 @@ namespace DevOps
     [DeserializeAs(Name = "artifact")]
     class NexusContent
     {
-        public string groupId { get; set; }
-        public string artifactId { get; set; }
-        public string version { get; set; }
-        public string latestRelease { get; set; }
+        public string leaf { get; set; }
+        public string text { get; set; }
+        public string lastModified { get; set; }
+        public string resourceURI { get; set; }
+        public string relativePath { get; set; }
 
         public override string ToString()
         {
-            string s = "groupId=" + groupId + " artifactId=" + artifactId + " version=" + version + " latestRelease=" + latestRelease;
+            string s = "text=" + text + " lastModified=" + lastModified + " resourceURI=" + resourceURI + " relativePath=" + relativePath;
             return s;
         }
     }
