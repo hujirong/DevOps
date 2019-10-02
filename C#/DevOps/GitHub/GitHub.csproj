@@ -36,11 +36,12 @@
     <StartupObject>DevOps.GitHubAPI</StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="RestSharp">
-      <HintPath>..\packages\RestSharp.105.2.3\lib\net45\RestSharp.dll</HintPath>
+    <Reference Include="RestSharp, Version=106.5.4.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.106.5.4\lib\net452\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -50,9 +51,9 @@
   <ItemGroup>
     <Compile Include="GitHubAPI.cs" />
     <Compile Include="GitHubOrg.cs" />
+    <Compile Include="GitHubCommit.cs" />
     <Compile Include="GitHubRepo.cs" />
     <Compile Include="GitHubTeam.cs" />
-    <Compile Include="GitHubCommit.cs" />
     <Compile Include="GitHubUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

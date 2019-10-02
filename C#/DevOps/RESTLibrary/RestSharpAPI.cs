@@ -22,7 +22,6 @@ namespace DevOps
             this.baseUrl = baseUrl;
         }
 
-
         /// <summary>
         /// Gets the client w/o authentication
         /// </summary>

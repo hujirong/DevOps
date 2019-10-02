@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.106
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{02FE9C30-F64A-413B-A321-12524BDDA754}"
 EndProject
@@ -10,6 +10,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nexus", "Nexus\Nexus.csproj", "{13018440-6874-4356-B8A6-C6B55956F0D9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RESTLibrary", "RESTLibrary\RESTLibrary.csproj", "{D910C3F4-0A74-4E0F-85A5-454987CDCB64}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UCD", "UCD\UCD.csproj", "{FE8F7FEF-6A7A-4314-88CD-8E7A6071C622}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D910C3F4-0A74-4E0F-85A5-454987CDCB64} = {D910C3F4-0A74-4E0F-85A5-454987CDCB64}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,8 +34,15 @@ Global
 		{D910C3F4-0A74-4E0F-85A5-454987CDCB64}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D910C3F4-0A74-4E0F-85A5-454987CDCB64}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D910C3F4-0A74-4E0F-85A5-454987CDCB64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE8F7FEF-6A7A-4314-88CD-8E7A6071C622}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE8F7FEF-6A7A-4314-88CD-8E7A6071C622}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE8F7FEF-6A7A-4314-88CD-8E7A6071C622}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE8F7FEF-6A7A-4314-88CD-8E7A6071C622}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5ED4DA02-F900-437B-93CC-28B977A27729}
 	EndGlobalSection
 EndGlobal

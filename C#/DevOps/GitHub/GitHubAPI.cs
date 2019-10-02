@@ -2,6 +2,8 @@
 using RestSharp;
 using System.Collections.Generic;
 using System.IO;
+using System.Net;
+
 
 
 namespace DevOps
@@ -14,14 +16,14 @@ namespace DevOps
         RestClient client;
         RestSharpAPI restSharpAPI;
 
-        static string baseUrl = "http://github.otpp.com/api/v3";
+        //static string baseUrl = "http://github.otpp.com/api/v3";
+        static string baseUrl = "https://api.github.com";
+        //static string gitHubUser = "svc_appbuilder_prod";
+        //static string gitHubToken = "028ce4aae8d952c3e65a7632d494316f07e9408e";
 
-        static string gitHubUser = "svc_appbuilder_prod";
-        static string gitHubToken = "028ce4aae8d952c3e65a7632d494316f07e9408e";
-
-        static string myUser = "huj";
-        static string myToken = "7e74b0179eda70a8b7a667a6da9f28f7e446ef1f";
-        static string myPassword = "";
+        static string myUser = "hujirong";        
+        static string myPassword = "Rat1onal";
+        static string gitHubToken = "2302c3d91789c274ef07ea06f227575cf4c9904f";
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GitHubAPI"/> class.
@@ -37,10 +39,10 @@ namespace DevOps
         /// Gets a single user, using userid/password for auth
         /// </summary>
         /// <returns>GitHubUser</returns>
-        public GitHubUser GetGitHubUser()
+        public GitHubUser GetGitHubUser(string name)
         {
             RestRequest request = new RestRequest();
-            request.Resource = "/users/huj";
+            request.Resource = "/users/" + name;
             request.RootElement = "GitHubUser";
 
             return restSharpAPI.Execute<GitHubUser>(this.client, request);
@@ -149,85 +151,91 @@ namespace DevOps
         static void Main(string[] args)
         {
             try
-            {                
+            {
+
+                // using System.Net;
+                ServicePointManager.Expect100Continue = true;
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+                // Use SecurityProtocolType.Ssl3 if needed for compatibility reasons
+
                 RestSharpAPI restSharpAPI = new RestSharpAPI(baseUrl);
-                //RestClient client = restSharpAPI.getClient(myUser, myPassword);
-                RestClient client = restSharpAPI.getClient2(myUser, myToken);
+                RestClient client = restSharpAPI.getClient(myUser, myPassword);
+                //RestClient client = restSharpAPI.getClient2(myUser, myToken);
                 GitHubAPI gitHubAPI = new GitHubAPI(restSharpAPI, client);
 
                 List<GitHubRepo> repos = new List<GitHubRepo>();
                 List<GitHubTeam> teams = new List<GitHubTeam>();
                 List<GitHubUser> users = new List<GitHubUser>();
-                List<GitHubCommit> commits = new List<GitHubCommit>();
+                //List<GitHubCommit> commits = new List<GitHubCommit>();
 
-                string since = "2016-01-01T00:00:00Z";
-                string path = "GitHubAuditReport_" + System.DateTime.Now.ToString("dd-MM-yyyy") + ".txt";                
+             //   string since = "2016-01-01T00:00:00Z";
+             //   string path = "GitHubAuditReport_" + System.DateTime.Now.ToString("dd-MM-yyyy") + ".txt";                
 
-                string org = "Trade-Efficiencies-CRD";
-                //string org = "DevOps";
-                string createText = "Audit Report for GitHub Organization: " + org + "\n";
-                createText = createText + "===============================================\n";
-                //string repo = "Sample";
-                repos = gitHubAPI.GetOrgRepos(org);
+             //   string org = "Trade-Efficiencies-CRD";
+             //   //string org = "DevOps";
+             //   string createText = "Audit Report for GitHub Organization: " + org + "\n";
+             //   createText = createText + "===============================================\n";
+             //   //string repo = "Sample";
+             //   repos = gitHubAPI.GetOrgRepos(org);
 
-                foreach (GitHubRepo repo in repos) // Loop through List with foreach.
-                {
-                    Console.WriteLine("repo info: {0} \n", repo.name);
-                    createText = createText + "\nRepository : " + repo.name + "\n";
-                    createText = createText + "------------------------------------------\n";
-                    commits = gitHubAPI.GetCommits(org, repo.name, since);
-                    if (commits.Count == 0)
-                    {
-                        createText = createText + "No new change in this repo.\n";
-                        continue;
-                    }
-                    foreach (GitHubCommit item in commits) // Loop through List with foreach.
-                    {
-                        Console.WriteLine("commit info: {0} \n", item.sha);
-                        createText = createText + "\nChange: " + item.message + "\n";
-                        GitHubCommit commit = gitHubAPI.GetCommit(org, repo.name, item.sha);
-                        createText = createText + commit.ToString();
-                    }
-                }
-                // Write to a file
-                createText = createText + Environment.NewLine;
-                File.WriteAllText(path, createText);
-                Console.WriteLine("File " + path +" created");
+             //   foreach (GitHubRepo repo in repos) // Loop through List with foreach.
+             //   {
+             //       Console.WriteLine("repo info: {0} \n", repo.name);
+             //       createText = createText + "\nRepository : " + repo.name + "\n";
+             //       createText = createText + "------------------------------------------\n";
+             ////       commits = gitHubAPI.GetCommits(org, repo.name, since);
+             ////       if (commits.Count == 0)
+             ////       {
+             ////           createText = createText + "No new change in this repo.\n";
+             ////           continue;
+             ////       }
+             ////       foreach (GitHubCommit item in commits) // Loop through List with foreach.
+             ////       {
+             ////           Console.WriteLine("commit info: {0} \n", item.sha);
+             ////           createText = createText + "\nChange: " + item.commit.message + "\n";
+             ////           GitHubCommit commit = gitHubAPI.GetCommit(org, repo.name, item.sha);
+             ////           createText = createText + commit.ToString();
+             ////       }
+             //   }
+             //   // Write to a file
+             //   createText = createText + Environment.NewLine;
+             //   File.WriteAllText(path, createText);
+             //   Console.WriteLine("File " + path +" created");
 
-                /// print single commit
-                //string sha = "60cf9d282af07d138504c0af987dd0fcdfe45ec6";
-                //GitHubCommit commit = gitHubAPI.GetCommit(org, repo, sha);
-                //Console.WriteLine("Commit info: {0}", commit.ToString());                
-                // Write to a file
-                //string path = "GitHubAuditReport_" + System.DateTime.Now.ToString("dd-MM-yyyy") + ".txt";
-                //string createText = commit.ToString() + Environment.NewLine;
-                //File.WriteAllText(path, createText);
-                //Console.WriteLine("file created");
+             //   /// print single commit
+             //   //string sha = "60cf9d282af07d138504c0af987dd0fcdfe45ec6";
+             //   //GitHubCommit commit = gitHubAPI.GetCommit(org, repo, sha);
+             //   //Console.WriteLine("Commit info: {0}", commit.ToString());                
+             //   // Write to a file
+             //   //string path = "GitHubAuditReport_" + System.DateTime.Now.ToString("dd-MM-yyyy") + ".txt";
+             //   //string createText = commit.ToString() + Environment.NewLine;
+             //   //File.WriteAllText(path, createText);
+             //   //Console.WriteLine("file created");
 
-                //repos = gitHubAPI.GetOrgRepos(org);
-                //foreach (GitHubRepo repo in repos) // Loop through List with foreach.
-                //{
-                //     Console.WriteLine("Repo info: {0}", repo.ToString());
-                //}  
+             //   //repos = gitHubAPI.GetOrgRepos(org);
+             //   //foreach (GitHubRepo repo in repos) // Loop through List with foreach.
+             //   //{
+             //   //     Console.WriteLine("Repo info: {0}", repo.ToString());
+             //   //}  
 
-                //string userId = "huj";
-                //repos = gitHubAPI.GetUserRepos(userId);
+             //   //string userId = "huj";
+             //   //repos = gitHubAPI.GetUserRepos(userId);
 
-                //teams = gitHubAPI.GetOrgTeams(org);
-                //foreach (GitHubTeam team in teams) // Loop through List with foreach.
-                //{
-                //    Console.WriteLine("Team info: {0}", team.ToString());
-                //    users = gitHubAPI.GetTeamMembers(team.id);
-                //    foreach (GitHubUser user in users) // Loop through List with foreach.
-                //    {
-                //        Console.WriteLine("User info: {0}", user.ToString());
-                //    }
-                //}
+             //   //teams = gitHubAPI.GetOrgTeams(org);
+             //   //foreach (GitHubTeam team in teams) // Loop through List with foreach.
+             //   //{
+             //   //    Console.WriteLine("Team info: {0}", team.ToString());
+             //   //    users = gitHubAPI.GetTeamMembers(team.id);
+             //   //    foreach (GitHubUser user in users) // Loop through List with foreach.
+             //   //    {
+             //   //        Console.WriteLine("User info: {0}", user.ToString());
+             //   //    }
+             //   //}
 
 
                 /// User Operations
-                //GitHubUser gitHubUser = gitHubAPI.GetGitHubUser();
-                //Console.WriteLine("User1 info: {0}", gitHubUser.ToString());
+                GitHubUser gitHubUser = gitHubAPI.GetGitHubUser("hujirong");
+                Console.WriteLine("User1 info: {0}", gitHubUser.ToString());
 
                 //GitHubUser gitHubUser2 = gitHubAPI.GetGitHubUser2();
                 //Console.WriteLine("User2 info: {0}", gitHubUser2.ToString());
