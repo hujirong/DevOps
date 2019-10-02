@@ -14,14 +14,14 @@ import com.beust.jcommander.JCommander
 import com.beust.jcommander.Parameter
 import com.beust.jcommander.ParameterException
 import com.beust.jcommander.Parameters
-import com.devops.utils.ADUtilities
+//import com.devops.utils.ADUtilities
 import com.devops.utils.ConfigFile
 import com.devops.utils.ConfigManager
 import com.devops.urbancode.admin.UdeployUpdate
 import com.devops.urbancode.deploy.DeployClient
 import groovy.json.JsonSlurper
-import org.apache.directory.groovyldap.LDAP
-import org.apache.directory.groovyldap.SearchScope
+//import org.apache.directory.groovyldap.LDAP
+//import org.apache.directory.groovyldap.SearchScope
 
 
 /**
@@ -36,7 +36,7 @@ class UserManager {
 	ConfigFile conf
 	String baseUrl
 	def cred
-	ADUtilities adu = new ADUtilities()
+	//ADUtilities adu = new ADUtilities()
 
 	UserManager() {
 		conf = ConfigManager.loadConf()
