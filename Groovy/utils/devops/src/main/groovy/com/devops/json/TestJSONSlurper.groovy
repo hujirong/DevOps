@@ -9,6 +9,7 @@ def object = jsonSlurper.parseText '''
 assert object instanceof List
 object.each {
 	assert it instanceof Map
-	print it.login + " "
+	println it.login + " "
 }
+
 
