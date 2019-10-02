@@ -1,5 +1,6 @@
 .gradle
-/build/
+\confmgr\build
+\devops\build
 
 # Ignore Gradle GUI config
 gradle-app.setting
