@@ -6,11 +6,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{FE8F7FEF-6A7A-4314-88CD-8E7A6071C622}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>UCD</RootNamespace>
+    <RootNamespace>DevOps</RootNamespace>
     <AssemblyName>UCD</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -50,8 +50,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UCDComponent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UCDComponent.cs" />
     <Compile Include="UCDAPI.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -64,5 +64,6 @@
       <Name>RESTLibrary</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
