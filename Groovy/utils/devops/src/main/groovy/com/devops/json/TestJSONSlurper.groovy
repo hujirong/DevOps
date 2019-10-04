@@ -11,5 +11,3 @@ object.each {
 	assert it instanceof Map
 	println it.login + " "
 }
-
-
