@@ -3,3 +3,12 @@
 ################################################################################
 
 /C#/DevOps/.vs/DevOps/v16/Server/sqlite3
+/C#/DevOps/GitHub/bin/Debug
+/C#/DevOps/GitHub/obj/Debug
+/C#/DevOps/Nexus/bin/Debug
+/C#/DevOps/packages/RestSharp.106.5.4
+/C#/DevOps/Nexus/obj/Debug
+/C#/DevOps/RESTLibrary/bin/Debug
+/C#/DevOps/RESTLibrary/obj/Debug
+/C#/DevOps/UCD/bin/Debug
+/C#/DevOps/UCD/obj/Debug
