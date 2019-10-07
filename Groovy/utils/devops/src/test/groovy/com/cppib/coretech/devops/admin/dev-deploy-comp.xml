@@ -1,0 +1,15 @@
+<!-- UCDDeploy components -->
+<UCDDeploy>
+  <application name='UCR-EPM-web' environment='DEV'>
+	<!-- application process -->
+    <process name='deploy'>
+      <!-- application process properties are optional -->
+	  <property name='prop1' value='testit'/>
+	  <property name='prop2' value='JIRA-222'/>
+	</process>
+	
+    <components>
+      <component name='UCR-EPM-web' version='4.00.03'/>
+    </components>
+  </application>
+</UCDDeploy>

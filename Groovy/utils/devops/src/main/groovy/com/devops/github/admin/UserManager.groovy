@@ -26,8 +26,8 @@ import groovy.json.JsonSlurper
 
 /**
  * Provide functions to manage GitHub users
- * 
- * @author 
+ *
+ * @author
  *
  */
 @Slf4j
@@ -62,12 +62,12 @@ class UserManager {
 			if (it.ldap_dn == null) {
 				log.info ("$it.login dn is null, next\n")
 				return
-			}			
+			}
 
 			if (!adu.exist(it.ldap_dn)) {
 				log.info("$it.ldap_dn not exists\n")
 				baduserList.push (it.ldap_dn)
-			}			
+			}
 		}
 		log.info("\n")
 		return baduserList
@@ -153,7 +153,7 @@ class UserManager {
 		JCommander jcmd = new JCommander(aup)
 
 		try {
-			def badusers = aup.checkAD()			
+			def badusers = aup.checkAD()
 			badusers.each {
 				log.info("Suspend user: $it")
 				//aup.suspendUser(it)

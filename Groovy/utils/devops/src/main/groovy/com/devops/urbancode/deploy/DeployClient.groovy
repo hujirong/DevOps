@@ -3,12 +3,12 @@ package com.devops.urbancode.deploy
 import groovy.json.JsonSlurper
 import groovy.util.logging.Slf4j
 
-import com.devops.Env;
-import com.devops.utils.ConfigFile;
+import com.devops.Env
+import com.devops.utils.ConfigFile
 
 /**
  * Access UrbanCode deploy with REST API
- * @author 
+ *
  *
  */
 @Slf4j
@@ -68,7 +68,7 @@ class DeployClient {
 	public runSession(String user, String password, Closure closure) {
 		try {
 			login(user, password)
-			closure.call()	
+			closure.call()
 		} finally {
 			logout()
 		}
@@ -137,7 +137,7 @@ class DeployClient {
 	 * Set version properties on a component
 	 * @param component component name
 	 * @param props property map
-	 * 
+	 *
 	 * Call createComponentVersionPropDefs() first, and then this method
 	 */
 	void setComponentVersionProperties(component, version, props) {
@@ -242,8 +242,8 @@ class DeployClient {
 		if (exitCode != 0) {
 			if (!allowVersionExist) {
 				throw new Exception("exitCode: $exitCode, error: $text")
-			}			
-			def found = (text =~ /(.*)Version with name $versionName already exists for Component#(.*) \((.*)\)/)			
+			}
+			def found = (text =~ /(.*)Version with name $versionName already exists for Component#(.*) \((.*)\)/)
 			if (found.count > 0) {
 				def versionId = found[0][2]
 				return versionId
@@ -252,24 +252,24 @@ class DeployClient {
 			}
 		}
 		
-		text = preProcess(text)		
+		text = preProcess(text)
 		def result = jsonSlurper.parseText(text)
 		return result.id
 	}
 	
-	String preProcess(String text) {		
+	String preProcess(String text) {
 		// Using 20080 for proxy port.Using 20080 for proxy port.
 		// The above string is added in front when using a proxy
 		int start = text.indexOf("{")
 		if (start >= 0) {
 			text = text.substring(start)
 		}
-		return text	
+		return text
 	}
 		
 	void login() {
 		login(null, null)
-	} 
+	}
 	
 	void login(String user, String password) {
 		if (user == null) {

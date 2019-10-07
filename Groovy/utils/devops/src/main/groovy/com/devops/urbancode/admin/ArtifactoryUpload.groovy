@@ -1,4 +1,4 @@
-package com.devops.nexus.admin
+package com.devops.urbancode.admin
 
 import groovy.util.logging.Slf4j
 import groovyx.net.http.ContentType
@@ -14,21 +14,19 @@ import com.beust.jcommander.JCommander
 import com.beust.jcommander.Parameter
 import com.beust.jcommander.ParameterException
 import com.beust.jcommander.Parameters
-import com.devops.utils.ConfigFile
-import com.devops.urbancode.admin.*
 import com.devops.urbancode.deploy.*
-/*
- * Upload artifacts to Nexus server, and update metadata on udeploy:
+import com.devops.utils.ConfigFile
+
+/**
+ * Upload artifacts to artifactory server, and update metadata on udeploy:
  * 
- * @author 
- *
  */
 @Slf4j
-@Parameters(commandDescription = "Upload artifacts to Nexus server, and update udeploy")
-class NexusUpload {
-	static String NEXUS_URL = "nexus.server"
+@Parameters(commandDescription = "Upload artifacts to artifactory server, and update udeploy")
+class ArtifactoryUpload {
+	static String ARTIFACTORY_URL = "artifactory.server"
 	
-	@Parameter(names = "-REPO", description = "Nexus Repository", required = true)
+	@Parameter(names = "-REPO", description = "Artifactory Repository", required = true)
 	String repo
 	
 	@Parameter(names = "-GID", description = "groupId", required = true)
@@ -43,7 +41,7 @@ class NexusUpload {
 	@Parameter(names = "-COMP", description = "UDeploy Component Name", required = false)
 	String component
 	
-	@Parameter(names = "-PATH", description = "Path contains all files to be uploaded to Nexus", required = true)
+	@Parameter(names = "-PATH", description = "Path contains all files to be uploaded to artifactory", required = true)
 	String path
 
 	@Parameter(names = "-COMMENT", description = "comments", required = false)
@@ -58,16 +56,16 @@ class NexusUpload {
 	
 	def cred
 		
-	NexusUpload() {
+	ArtifactoryUpload() {
 	}
 	
 	void process() {
 		conf = UdeployUpdate.loadConf()
 		
 		cred = UdeployUpdate.getCredential(conf, user)
-		baseUrl = conf.getConfig(NEXUS_URL)
+		baseUrl = conf.getConfig(ARTIFACTORY_URL)
 		
-		log.info("Nexus upload: baseUrl=$baseUrl")
+		log.info("Artifactory upload: baseUrl=$baseUrl")
 		log.info("            user=${cred.user}")
 		log.info("            repo=$repo, groupId=$groupId, artifactId=$artifactId, version=$version")
 		log.info("            path=$path")
@@ -121,8 +119,7 @@ class NexusUpload {
 	// delete artifact version
 	void deleteVersion() {
 		// check if folder exist
-		//String artifactPath = "/artifactory/api/storage/$repo/$groupIdPath/$artifactId/$version"
-		String artifactPath = "/nexus/service/local/repositories/$repo/content/$groupIdPath/$artifactId/$version"
+		String artifactPath = "/artifactory/api/storage/$repo/$groupIdPath/$artifactId/$version"
 		log.info("Check if path exist: $artifactPath")
 		
 		def foundFolder = false
@@ -149,10 +146,7 @@ class NexusUpload {
 		}
 		
 		// delete folder
-		//artifactPath = "/artifactory/$repo/$groupIdPath/$artifactId/$version"
-		//http://localhost:8081/artifactory/libs-release-local/com/otpp/devops/OnePnLSSIS/1.0/OnePnLSSIS-1.0-.jar
-		artifactPath = "/nexus/service/local/repositories/$repo/content/$groupIdPath/$artifactId/$version"
- //http://localhost:8081/nexus/service/local/repositories/thirdparty/content/com/otpp/devops/OnePnLSSIS/1.0/OnePnLSSIS.jar		
+		artifactPath = "/artifactory/$repo/$groupIdPath/$artifactId/$version"
 		log.info("Delete path $artifactPath")
 		
 		httpBuilder = getHTTPBuilder()
@@ -170,8 +164,7 @@ class NexusUpload {
 	
 	// deploy single artifact
 	void deployArtifact(File file) {
-		//String artifactPath = "/artifactory/$repo/$groupIdPath/$artifactId/$version/" + file.getName()
-		String artifactPath = "/nexus/service/local/repositories/$repo/content/$groupIdPath/$artifactId/$version/" + file.getName()
+		String artifactPath = "/artifactory/$repo/$groupIdPath/$artifactId/$version/" + file.getName()
 		log.info("Upload single file to $artifactPath")
 		
 		def httpBuilder = getHTTPBuilder()
@@ -182,17 +175,17 @@ class NexusUpload {
 		 
 			response.'201' = { resp, reader ->
 				log.info("Succeed: ${resp.statusLine}")
-				//log.info(reader.text)
+				log.info(reader.text)
 			}
 		 
 			response.success = { resp, reader ->
 				log.info("Succeed: ${resp.statusLine}")
-				//log.info(reader.text)
+				log.info(reader.text)
 			}
 		 
 			response.failure = { resp, reader ->
 				log.error("Failed: ${resp.statusLine}")
-				//log.error(reader.text)
+				log.error(reader.text)
 				throw new Exception("Deploy artifact failed")
 			}
 		}
@@ -203,15 +196,13 @@ class NexusUpload {
 		// zip files
 		def file = new File(System.getProperty('user.home') + '/devops/tmp')
 		file.mkdirs()
-		file = new File(file, 'nexusUpload.zip')
+		file = new File(file, 'artifactoryUpload.zip')
 		
-		// don't include sha1, md5 files, Nexus will generate its own checksum files.
+		// don't include sha1, md5 files, artifactory will generate its own checksum files.
 		def ant = new AntBuilder()
 		ant.zip(destfile: file, basedir: dir.path, excludes: "**/*.sha1, **/*.md5")
 		
-		//String artifactPath = "/artifactory/$repo/$groupIdPath/$artifactId/$version/" + file.getName()
-		//String artifactPath = "/nexus/service/local/repositories/$repo/content/$groupIdPath/$artifactId/$version/" + file.getName()
-		String artifactPath = "/nexus/service/local/repositories/$repo/content-compressed/$groupIdPath/$artifactId/$version/"
+		String artifactPath = "/artifactory/$repo/$groupIdPath/$artifactId/$version/" + file.getName()
 		log.info("Upload archive to $artifactPath");
 
 		def httpBuilder = getHTTPBuilder()
@@ -232,7 +223,7 @@ class NexusUpload {
 				 
 			response.failure = { resp, reader ->
 				log.error("Failed: ${resp.statusLine}")
-				//log.error(reader.text)
+				log.error(reader.text)
 				throw new Exception("Deploy archive artifacts failed")
 			}
 		}
@@ -261,7 +252,7 @@ class NexusUpload {
 	}
 	
 	public static void main(String[] args) {
-		NexusUpload aup = new NexusUpload()
+		ArtifactoryUpload aup = new ArtifactoryUpload()
 		JCommander jcmd = new JCommander(aup)
 		
 		try {
@@ -276,7 +267,7 @@ class NexusUpload {
 			
 		} catch (Throwable ta) {
 			ta = StackTraceUtils.sanitizeRootCause(ta)
-			log.error("NexusUpload FAILED", ta)
+			log.error("ArtifactoryUpload FAILED", ta)
 			System.exit(-1)
 		}
 		

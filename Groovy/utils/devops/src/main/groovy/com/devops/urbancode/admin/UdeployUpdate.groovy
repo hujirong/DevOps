@@ -15,12 +15,10 @@ import com.devops.urbancode.deploy.DeployClient
 import com.devops.urbancode.deploy.DeployRestAPI
 import com.devops.utils.ConfigFile
 
-/**
- * Update udeploy:
+/* Update udeploy:
  * - create component version if required
  * - add/update artifactory information on the component version
- * 
- * @author 
+ *  
  *
  */
 @Slf4j

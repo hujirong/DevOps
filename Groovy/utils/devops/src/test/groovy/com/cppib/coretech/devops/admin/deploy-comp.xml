@@ -1,0 +1,18 @@
+<!-- UCDDeploy components -->
+<UCDDeploy>
+  <application name='DMS-dif' environment='QA-SB'>
+	<!-- application process -->
+    <process name='DeployAll'>
+      <!-- application process properties are optional
+	  <property name='prop1' value='testit'/>
+	  <property name='prop2' value='JIRA-222'/>
+	   -->
+	</process>
+	
+    <components>
+      <component name='DMS-dif-container' version='1.1.0-SNAPSHOT'/>
+      <component name='DMS-dif-data' version='1.1.0-SNAPSHOT'/>
+      <component name='DMS-dif-services' version='1.1.0-SNAPSHOT'/>
+    </components>
+  </application>
+</UCDDeploy>

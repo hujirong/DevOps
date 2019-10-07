@@ -1,5 +1,4 @@
 package com.devops.json
-
 import groovy.json.JsonSlurper
  
 def jsonSlurper = new JsonSlurper()

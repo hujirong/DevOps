@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="UDeployTests">
+  <test verbose="2" name="TeamManager">
+    <classes>
+      <class name="com.cppib.core.urbancode.test.TeamManagerTest"/>
+    </classes>
+  </test>
+ 
+ <!-- 
+  <test verbose="2" name="ApplicationTest">
+    <classes>
+      <class name="com.cppib.core.urbancode.test.ApplicationTest"/>
+    </classes>
+  </test>
+
+  <test verbose="2" name="ComponentTemplateTest">
+    <classes>
+      <class name="com.cppib.core.urbancode.test.ComponentTemplateTest"/>
+    </classes>
+  </test>
+
+  <test verbose="2" name="ComponentTest">
+    <classes>
+      <class name="com.cppib.core.urbancode.test.ComponentTest"/>
+    </classes>
+  </test -->
+</suite>
