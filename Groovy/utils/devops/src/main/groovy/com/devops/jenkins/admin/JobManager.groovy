@@ -6,7 +6,7 @@ import com.beust.jcommander.JCommander
 import com.beust.jcommander.ParameterException
 
 /**
- * Manage environment properties 
+ * Manage Jenkins job 
  *
  */
 @Slf4j
