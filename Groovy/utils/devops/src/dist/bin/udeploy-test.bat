@@ -5,7 +5,7 @@ echo Test on uDeploy...
 
 @REM Check JAVA_HOME
 if "%JAVA_HOME%" == "" (
-  set JAVA_EXE="C:\Program Files\Java\jre7\bin\java.exe"
+  set JAVA_EXE="C:\DevOps\Java\jdk1.8.0_71\jre\bin\java.exe"
 ) else (
   set JAVA_EXE="%JAVA_HOME%\bin\java.exe"
 )
