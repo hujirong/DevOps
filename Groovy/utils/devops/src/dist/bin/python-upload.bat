@@ -6,7 +6,7 @@ echo.
 
 @REM Check JAVA_HOME
 if "%JAVA_HOME%" == "" (
-  set JAVA_EXE="C:\Program Files\Java\jre7\bin\java.exe"
+  set JAVA_EXE="C:\DevOps\Java\jdk1.8.0_71\jre\bin\java.exe"
 ) else (
   set JAVA_EXE="%JAVA_HOME%\bin\java.exe"
 )
@@ -42,5 +42,5 @@ for /f "delims=" %%f in ('dir /b %APP_HOME%\lib') do (
   set CLASSPATH=!CLASSPATH!;%APP_HOME%\lib\%%f
 )
 
-%JAVA_EXE% %JVM_OPTS% -classpath "%CLASSPATH%" com.cppib.coretech.devops.versions.PythonUploader %CMD_LINE_ARGS%
+%JAVA_EXE% %JVM_OPTS% -classpath "%CLASSPATH%" com.devops.urbancode.admin.PythonUploader %CMD_LINE_ARGS%
 

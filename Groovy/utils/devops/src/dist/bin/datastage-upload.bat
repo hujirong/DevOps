@@ -42,4 +42,4 @@ for /f "delims=" %%f in ('dir /b %APP_HOME%\lib') do (
   set CLASSPATH=!CLASSPATH!;%APP_HOME%\lib\%%f
 )
 
-%JAVA_EXE% %JVM_OPTS% -classpath "%CLASSPATH%" com.cppib.coretech.devops.versions.DataStageVersionUploader %CMD_LINE_ARGS%
+%JAVA_EXE% %JVM_OPTS% -classpath "%CLASSPATH%" com.devops.versions.DataStageVersionUploader %CMD_LINE_ARGS%
