@@ -1,6 +1,6 @@
-package com.cppib.coretech.devops.versions;
+package com.devops.versions;
 
-import com.cppib.coretech.devops.Env
+import com.devops.Env
 
 Env.APP_HOME = 'build/install/devops'
 

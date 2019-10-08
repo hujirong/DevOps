@@ -12,8 +12,8 @@ import org.testng.Assert
 import org.testng.annotations.AfterTest
 import org.testng.annotations.BeforeTest
 
-import com.cppib.coretech.devops.utils.ConfigFile
-import com.cppib.coretech.devops.versions.UdeployUpdate
+import com.devops.utils.ConfigFile
+import com.devops.versions.UdeployUpdate
 
 
 /**

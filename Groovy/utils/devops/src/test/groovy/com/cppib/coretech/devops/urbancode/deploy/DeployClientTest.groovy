@@ -1,4 +1,4 @@
-package com.cppib.coretech.devops.urbancode.deploy
+package com.devops.urbancode.deploy
 
 def client = new DeployClient(new File(System.getProperty('user.home') + '/devops/conf/devops.properties'))
 

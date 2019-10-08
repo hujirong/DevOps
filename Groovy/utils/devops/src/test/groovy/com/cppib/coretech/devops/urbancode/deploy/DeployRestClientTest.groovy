@@ -1,4 +1,4 @@
-package com.cppib.coretech.devops.urbancode.deploy;
+package com.devops.urbancode.deploy;
 
 def restClient = new DeployRestClient('https://dviappvmsvn02:8443')
 restClient.login('admin', 'admin')

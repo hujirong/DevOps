@@ -3,8 +3,8 @@ package com.cppib.core.urbancode.test
 import org.apache.commons.logging.Log
 import org.apache.commons.logging.LogFactory
 
-import com.cppib.coretech.devops.utils.ConfigFile
-import com.cppib.coretech.devops.versions.UdeployUpdate
+import com.devops.utils.ConfigFile
+import com.devops.versions.UdeployUpdate
 
 
 class UTestConf {

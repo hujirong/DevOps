@@ -1,4 +1,4 @@
-package com.cppib.coretech.devops.admin
+package com.devops.admin
 
 def fname = 'C:/Users/hhou/projects/core/devops/trunk/udeploy-management/teams/CoreTech.groovy'
 

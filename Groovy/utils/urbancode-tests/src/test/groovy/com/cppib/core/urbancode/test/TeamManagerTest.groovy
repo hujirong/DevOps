@@ -11,13 +11,13 @@ import org.apache.commons.logging.LogFactory
 import org.testng.annotations.BeforeTest
 import org.testng.annotations.Test
 
-import com.cppib.coretech.devops.admin.TeamImport
-import com.cppib.coretech.devops.urbancode.deploy.DeployRestAPI
-import com.cppib.coretech.devops.urbancode.deploy.model.Application
-import com.cppib.coretech.devops.urbancode.deploy.model.Component
-import com.cppib.coretech.devops.urbancode.deploy.model.Environment
-import com.cppib.coretech.devops.urbancode.deploy.model.Resource
-import com.cppib.coretech.devops.urbancode.deploy.model.Team
+import com.devops.admin.TeamImport
+import com.devops.urbancode.deploy.DeployRestAPI
+import com.devops.urbancode.deploy.model.Application
+import com.devops.urbancode.deploy.model.Component
+import com.devops.urbancode.deploy.model.Environment
+import com.devops.urbancode.deploy.model.Resource
+import com.devops.urbancode.deploy.model.Team
 
 class TeamManagerTest {
 	static Log log = LogFactory.getLog(TeamManagerTest.class)
