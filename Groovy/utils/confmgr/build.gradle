@@ -10,5 +10,6 @@ group = 'com.devops.utils'
 
 dependencies {
 	
-	compile files('C:/Users/Alex/devops/groovy-ldap.jar')
+	compile files('C:/Users/hujir/devops/groovy-ldap-1.0.1.jar')
+	compile files('C:/Users/hujir/devops/com.sun.net.ssl.jar')
 }
