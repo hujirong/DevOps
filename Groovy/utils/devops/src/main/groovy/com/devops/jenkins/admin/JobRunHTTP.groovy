@@ -11,6 +11,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Base64;
 //https://support.cloudbees.com/hc/en-us/articles/226852648-How-to-build-a-job-using-the-REST-API-and-Java-
+
+@Slf4j
 class JobRunHTTP {
 	@Parameter(names = "-U", description = "Jenkins user", required = true)
 	String user
