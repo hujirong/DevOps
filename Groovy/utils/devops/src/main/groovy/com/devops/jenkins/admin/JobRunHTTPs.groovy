@@ -10,7 +10,7 @@ import javax.net.ssl.SSLContext
 import javax.net.ssl.TrustManager
 import javax.net.ssl.X509TrustManager
 
-class JobRun {
+class JobRunHTTPs {
 	@Parameter(names = "-U", description = "Jenkins user", required = true)
 	String user
 	@Parameter(names = "-P", description = "Jenkins password", required = true)
@@ -35,9 +35,9 @@ class JobRun {
 		sc.init(null,[nullTrustManager as X509TrustManager] as TrustManager[], null)
 		HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory())
 		HttpsURLConnection.setDefaultHostnameVerifier(nullHostnameVerifier as HostnameVerifier)
-		def UserID = 'admin:admin'
+		def UserID = "${user}:${password}" //admin:admin
 		def authString = UserID.getBytes().encodeBase64().toString()
-		def baseUrl = new URL('http://localhost:8080/job/Test/job/Whoami/build')
+		def baseUrl = new URL(url) //http://localhost:8080/job/Test/job/Whoami/build
 		def queryString = ''
 		//def queryString = 'q=groovy&format=json&pretty=1&JenkinsParameter'
 

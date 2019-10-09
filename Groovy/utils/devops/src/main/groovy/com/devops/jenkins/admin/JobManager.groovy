@@ -11,7 +11,7 @@ import com.beust.jcommander.ParameterException
  */
 @Slf4j
 class JobManager {
-	void run(JobRun cmd) {		
+	void run(JobRunHTTP cmd) {		
 		cmd.run()
 	}
 	
@@ -19,9 +19,9 @@ class JobManager {
 		JobManager jb = new JobManager()
 
 		JCommander jcmd = new JCommander(jb);		
-		JobRun run = new JobRun();
+		JobRunHTTP run = new JobRunHTTP();
 		jcmd.addCommand("run", run);			
-		JobRun cmd // at this moment, only one command "run", later can "delete", etc.
+		JobRunHTTP cmd // at this moment, only one command "run", later can "delete", etc.
 		
 		try {
 			jcmd.parse(args)			
