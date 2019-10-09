@@ -10,7 +10,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Base64;
-
+//https://support.cloudbees.com/hc/en-us/articles/226852648-How-to-build-a-job-using-the-REST-API-and-Java-
 class JobRunHTTP {
 	@Parameter(names = "-U", description = "Jenkins user", required = true)
 	String user
@@ -25,6 +25,7 @@ class JobRunHTTP {
 			//String user = user; // username
 			//String pass = password; // password or API token
 			String authStr = user + ":" + password;
+			println authStr
 			String encoding = Base64.getEncoder().encodeToString(authStr.getBytes("utf-8"));
 
 			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
