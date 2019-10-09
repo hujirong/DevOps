@@ -41,5 +41,5 @@ for /f "delims=" %%f in ('dir /b %APP_HOME%\lib') do (
   set CLASSPATH=!CLASSPATH!;%APP_HOME%\lib\%%f
 )
 
-%JAVA_EXE% %JVM_OPTS% -classpath "%CLASSPATH%" com.devops.urbancode.UdeployUpdate %CMD_LINE_ARGS%
+%JAVA_EXE% %JVM_OPTS% -classpath "%CLASSPATH%" com.devops.urbancode.admin.UdeployUpdate %CMD_LINE_ARGS%
 
