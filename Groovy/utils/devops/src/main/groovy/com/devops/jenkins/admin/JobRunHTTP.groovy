@@ -21,11 +21,12 @@ class JobRunHTTP {
 
 	public void run() {
 		try {
-			URL url = new URL(url); // Jenkins URL localhost:8080, job named 'test'
+			log.info("URL="+url)
+			URL url = new URL(url); // Jenkins URL localhost:8080, job named 'test'			
 			//String user = user; // username
 			//String pass = password; // password or API token
 			String authStr = user + ":" + password;
-			println authStr
+			log.info(authStr)
 			String encoding = Base64.getEncoder().encodeToString(authStr.getBytes("utf-8"));
 
 			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
