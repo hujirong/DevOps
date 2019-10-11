@@ -73,13 +73,14 @@ class UdeployUpdate {
 		// keyFile
 		File confDir = new File(System.getProperty('user.home') +  '/devops/conf')
 		File keyFile = new File(confDir, KEY_FILE)
-			
+		if (!keyFile.exists()) {
+			log.info("key file $keyFile is not exist")
+		}
 		// load confFile
 		File confFile = new File(confDir, 'devops.properties')
 		if (!confFile.exists()) {
 			throw new Exception("Conf file $confFile is not exist")
-		}
-		
+		}		
 		log.info("Load conf file from $confFile")
 		return new ConfigFile(confFile, keyFile)
 	}
