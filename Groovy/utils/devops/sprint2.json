@@ -1,0 +1,15 @@
+{
+    "name": "SCRUM Sprint 4",
+    "startDate": "2019-10-11T15:22:00.000+10:00",
+    "endDate": "2019-10-20T01:22:00.000+10:00",
+    "originBoardId": 65
+}
+
+{"name": "SCRUM Sprint 4","startDate": "2019-10-11T15:22:00.000+10:00","endDate": "2019-10-20T01:22:00.000+10:00","originBoardId": 65}
+
+C:\DevOps\GitRepo\DevOps\Groovy\utils\devops>curl -u "jirong.hu:admin" -X delete http://localhost:8085/rest/agile/latest/sprint/3
+
+C:\DevOps\GitRepo\DevOps\Groovy\utils\devops>curl -u "jirong.hu:admin" -X GET http://localhost:8085/rest/agile/latest/sprint/3
+{"id":3,"self":"http://localhost:8085/rest/agile/1.0/sprint/3","state":"future","name":"SCRUM Sprint 3","originBoardId":65}
+C:\DevOps\GitRepo\DevOps\Groovy\utils\devops>
+

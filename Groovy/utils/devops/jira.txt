@@ -1,0 +1,4 @@
+C:\DevOps\GitRepo\DevOps\Groovy\utils\devops>curl -u "jirong.hu:admin" -X GET http://localhost:8085/rest/agile/1.0/sprint/1
+{"id":1,"self":"http://localhost:8085/rest/agile/1.0/sprint/1","state":"active","name":"SCRUM Sprint 1","startDate":"2019-10-23T14:36:18.359-04:00","endDate":"2019-11-06T14:36:00.000-05:00","originBoardId":65,"goal":""}
+C:\DevOps\GitRepo\DevOps\Groovy\utils\devops>
+
