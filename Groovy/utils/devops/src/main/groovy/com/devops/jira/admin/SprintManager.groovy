@@ -12,12 +12,13 @@ import org.apache.http.HttpRequest
 import org.apache.http.HttpRequestInterceptor
 import org.apache.http.protocol.HttpContext
 import org.codehaus.groovy.runtime.StackTraceUtils
+import static groovy.json.JsonOutput.toJson
 
 import com.devops.jira.JIRARestAPI
 import com.devops.urbancode.deploy.DeployRestAPI
 import com.devops.utils.ConfigFile
 /*
- * Create, Start and Complete Sprints
+ * Create, Delete, Update(Start/Complete) Sprints
 */
 
 @Slf4j
@@ -40,7 +41,8 @@ class SprintManager {
         httpBuilder.request(Method.POST) { req ->
             uri.path = '/rest/agile/latest/sprint'
             body = [name:name,originBoardId:originBoardId]
-           requestContentType = ContentType.JSON            
+            requestContentType = ContentType.JSON
+                     
             response.success = { resp, reader ->
                 log.info("Succeeded: Sprint ${name} is created")
             }            
@@ -48,6 +50,50 @@ class SprintManager {
                 def text = reader.text    
                 log.error("Failed: status ${resp.status} ${resp.statusLine}")
                 log.error("        $text")              
+            }
+        }
+    }
+    
+    /*
+     * Can NOT be used to Start/Complete the Sprint
+     * 
+     */
+    def pUpdateSprint(String id, String field, String value) {
+        log.info("Partial Update Sprint to: ${field}:${value}")
+        
+        httpBuilder.request(Method.POST) { req ->
+            uri.path = "/rest/agile/latest/sprint/${id}"
+            body = [field:value]
+            requestContentType = ContentType.JSON
+            
+            response.success = { resp, reader ->
+                log.info("Succeeded: Sprint ${field} is updated to ${value}")
+            }
+            response.failure = { resp, reader ->
+                log.error("Failed: status ${resp.status} ${resp.statusLine}")
+
+            }
+        }
+    }
+    
+    /*
+     * Can NOT be used to Start/Complete the Sprint
+     *
+     */
+    def startSprint(String id, String startDate, String endDate) {
+        log.info("Start Sprint: ${id}")
+        
+        httpBuilder.request(Method.POST) { req ->
+            uri.path = "/rest/agile/latest/sprint/${id}"
+            body = [id:id,startDate:startDate,endDate:endDate,state:"active"]
+            requestContentType = ContentType.JSON
+            
+            response.success = { resp, reader ->
+                log.info("Succeeded: Sprint started")
+            }
+            response.failure = { resp, reader ->
+                log.error("Failed: status ${resp.status} ${resp.statusLine}")
+
             }
         }
     }
@@ -76,11 +122,17 @@ class SprintManager {
         //JCommander jcmd = new JCommander(sm)
         def name = "Lab1 Sprint 1"
         def originBoardId = "65"
-        def id = "5"
+        def id = "4"
+        def key = "state"
+        def value = "active"
+        def startDate = "2018-05-08"
+        def endDate = "2018-05-18"
+        
         try {
             //jcmd.parse(args)
             //sm.createSprint(name, originBoardId)
-            sm.deleteSprint(id)
+            //sm.deleteSprint(id)
+            sm.startSprint(id, startDate, endDate)
             
         } catch (ParameterException ex) {
             System.out.println(ex.getMessage())
