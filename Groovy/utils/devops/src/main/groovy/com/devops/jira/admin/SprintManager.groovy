@@ -32,6 +32,13 @@ class SprintManager {
         httpBuilder = jiraRestAPI.getHTTPBuilder()        
     }
     
+	/*
+	 * Read CSV file and return a list 
+	 */
+	List readCSV(String csvFile) {
+		def fh = new File(csvFile)
+	}
+	
     /*
      * Can create multiple Sprints with the same name, internal id is different
      */
@@ -55,19 +62,19 @@ class SprintManager {
     }
     
     /*
-     * Can NOT be used to Start/Complete the Sprint
+     * Can NOT be used to Start the Sprint
      * 
      */
-    def pUpdateSprint(String id, String field, String value) {
-        log.info("Partial Update Sprint to: ${field}:${value}")
+    def pUpdateSprint(String id, String state, String value) {
+        log.info("Partial Update Sprint to: ${state}:${value}")
         
         httpBuilder.request(Method.POST) { req ->
             uri.path = "/rest/agile/latest/sprint/${id}"
-            body = [field:value]
+            body = [state:value] // the first one doesn't change
             requestContentType = ContentType.JSON
             
             response.success = { resp, reader ->
-                log.info("Succeeded: Sprint ${field} is updated to ${value}")
+                log.info("Succeeded: Sprint ${state} is updated to ${value}")
             }
             response.failure = { resp, reader ->
                 log.error("Failed: status ${resp.status} ${resp.statusLine}")
@@ -76,8 +83,13 @@ class SprintManager {
         }
     }
     
+	def completeSprint(String id) {
+		pUpdateSprint(id, "state", "closed")
+	}
+	
+	
     /*
-     * Can NOT be used to Start/Complete the Sprint
+     * Start the Sprint requires dates
      *
      */
     def startSprint(String id, String startDate, String endDate) {
@@ -132,7 +144,8 @@ class SprintManager {
             //jcmd.parse(args)
             //sm.createSprint(name, originBoardId)
             //sm.deleteSprint(id)
-            sm.startSprint(id, startDate, endDate)
+            //sm.startSprint(id, startDate, endDate)
+			sm.completeSprint(id)
             
         } catch (ParameterException ex) {
             System.out.println(ex.getMessage())
