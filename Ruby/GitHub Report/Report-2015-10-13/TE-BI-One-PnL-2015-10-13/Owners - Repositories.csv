@@ -1,0 +1,12 @@
+repo_name, access
+TE-BI-One-PnL/Documents, admin
+TE-BI-One-PnL/Excel-AddIn, admin
+TE-BI-One-PnL/One-PnL-Daily-Snapshot-TIBCO-Orchestration, admin
+TE-BI-One-PnL/One-PnL-DPRS-Synch-Notification-Process, admin
+TE-BI-One-PnL/One-PnL-SSIS-TIBCO-Orchestration, admin
+TE-BI-One-PnL/OnePnLService, admin
+TE-BI-One-PnL/PerfTest, admin
+TE-BI-One-PnL/SSIS, admin
+TE-BI-One-PnL/Staging-Schema, admin
+TE-BI-One-PnL/Tabular-Model, admin
+TE-BI-One-PnL/TIBCOSingleCubeProcessingOrchestration, admin

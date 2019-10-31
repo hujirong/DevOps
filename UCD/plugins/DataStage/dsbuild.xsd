@@ -1,0 +1,52 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="PROJECT">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="PACKAGES">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="PACKAGE" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute type="xs:string" name="FOLDER" use="required"/>
+                      <xs:attribute type="xs:string" name="BUILDLABEL" use="required"/>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="SCRIPTS" minOccurs="0" >
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="SCRIPT" maxOccurs="unbounded" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="BACKUPJOBS" minOccurs="0" >
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="BACKUPJOB" maxOccurs="unbounded" minOccurs="0"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>                
+        <xs:element name="VALIDATEJOBS" minOccurs="0" >
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="VALIDATEJOB" maxOccurs="unbounded" minOccurs="0"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>      
+      <xs:attribute type="xs:string" name="ROOTPATH" use="required" />
+      <xs:attribute type="xs:string" name="AID" use="required" /> 
+      <xs:attribute type="xs:string" name="GID" use="required" /> 
+      <xs:attribute type="xs:string" name="REPO" use="required" />
+      <xs:attribute type="xs:string" name="BACKUPTARGET" use="optional" />
+      <xs:attribute type="xs:string" name="CHANGETARGETCONFIG" use="optional" />  
+      <xs:attribute type="xs:string" name="URBANCODECOMP" use="optional" />  
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

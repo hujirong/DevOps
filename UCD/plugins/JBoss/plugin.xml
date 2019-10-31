@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<plugin xmlns="http://www.urbancode.com/PluginXMLSchema_v1" xmlns:server="http://www.urbancode.com/PluginServerXMLSchema_v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <header>
+    <identifier id="com.cppib.core.urbancode.plugin.jboss" name="CPPIB JBoss Utilities" version="03"/>
+    <description>
+    	This plugin provides steps to manipulate CPPIB JBoss containers
+    </description>
+    <tag>CPPIB/JBoss</tag>
+  </header>
+
+  <step-type name="get-deploy-dir">
+      <description>Get deploy directory</description>
+      <properties>
+        <property name="containerHome" required="true">
+          <property-ui type="textBox" 
+				default-value="${p:containerHome}"
+				description="JBoss container home directory"/>
+        </property>
+      </properties>
+      <post-processing>
+        <![CDATA[
+          if (properties.get("exitCode") != 0) {
+              properties.put(new java.lang.String("Status"), new java.lang.String("Failure"));
+          }
+          else {
+              properties.put("Status", "Success");
+          }
+       ]]>
+      </post-processing>
+
+      <command program="${GROOVY_HOME}/bin/groovy">
+        <arg value="-cp"/>
+        <arg path="groovy"/>
+        <arg file="groovy/GetConfProperty.groovy"/>
+        <arg value="${p:containerHome}"/>
+        <arg value="DEPLOY_DIR"/>
+		<arg file="${PLUGIN_OUTPUT_PROPS}"/>
+      </command>
+  </step-type> 
+  
+  <step-type name="get-conf-dir">
+      <description>Get configuration directory</description>
+      <properties>
+        <property name="containerHome" required="true">
+          <property-ui type="textBox" 
+				default-value="${p:containerHome}"
+				description="JBoss container home directory"/>
+        </property>
+      </properties>
+      <post-processing>
+        <![CDATA[
+          if (properties.get("exitCode") != 0) {
+              properties.put(new java.lang.String("Status"), new java.lang.String("Failure"));
+          }
+          else {
+              properties.put("Status", "Success");
+          }
+       ]]>
+      </post-processing>
+
+      <command program="${GROOVY_HOME}/bin/groovy">
+        <arg value="-cp"/>
+        <arg path="groovy"/>
+        <arg file="groovy/GetConfProperty.groovy"/>
+        <arg value="${p:containerHome}"/>
+        <arg value="CONF_DIR"/>
+		<arg file="${PLUGIN_OUTPUT_PROPS}"/>
+      </command>
+  </step-type> 
+  
+  <step-type name="set-conf-dir">
+      <description>Set configuration directory in JMV OPTIONS. After that you can get JBOSS_CONF_DIR in application like: System.getProperty("JBOSS_CONF_DIR")</description>
+      <properties>
+        <property name="containerHome" required="true">
+          <property-ui type="textBox" 
+				default-value="${p:containerHome}"
+				description="JBoss container home directory"/>
+        </property>
+      </properties>
+      <post-processing>
+        <![CDATA[
+          if (properties.get("exitCode") != 0) {
+              properties.put(new java.lang.String("Status"), new java.lang.String("Failure"));
+          }
+          else {
+              properties.put("Status", "Success");
+          }
+       ]]>
+      </post-processing>
+
+      <command program="${GROOVY_HOME}/bin/groovy">
+        <arg value="-cp"/>
+        <arg path="groovy"/>
+        <arg file="groovy/UpdateJavaOpts.groovy"/>
+        <arg value="${p:containerHome}"/>
+        <arg value=""/>
+      </command>
+  </step-type> 
+  
+  <step-type name="update-java-opts">
+      <description>Set/Update JAVA_OPTS for JBoss container.</description>
+      <properties>
+        <property name="containerHome" required="true">
+          <property-ui type="textBox" 
+				default-value="${p:containerHome}"
+				description="JBoss container home directory"/>
+        </property>
+        <property name="JAVA_OPTS">
+          <property-ui type="textBox"
+				description="Define multiple parameters and this step will update them in the JAVA_OPTS.
+						Eg: -Xms1024m -Xmx1024m -XX:MaxPermSize=512m"/>
+        </property>
+      </properties>
+      <post-processing>
+        <![CDATA[
+          if (properties.get("exitCode") != 0) {
+              properties.put(new java.lang.String("Status"), new java.lang.String("Failure"));
+          }
+          else {
+              properties.put("Status", "Success");
+          }
+       ]]>
+      </post-processing>
+
+      <command program="${GROOVY_HOME}/bin/groovy">
+        <arg value="-cp"/>
+        <arg path="groovy"/>
+        <arg file="groovy/UpdateJavaOpts.groovy"/>
+        <arg value="${p:containerHome}"/>
+        <arg value="${p:JAVA_OPTS}"/>
+      </command>
+  </step-type> 
+
+  <step-type name="add-datasources">
+      <description>Add datasources to JBoss container.</description>
+      <properties>
+        <property name="containerHome" required="true">
+          <property-ui type="textBox" 
+				default-value="${p:containerHome}"
+				description="JBoss container home directory"/>
+        </property>
+        <property name="datasourceFile">
+          <property-ui type="textBox"
+				description="This XML file containers datasources element."/>
+        </property>
+        <property name="encryptPassword">
+          <property-ui type="checkBox"
+				default-value="false"
+				description="Encrypt connection password."/>
+        </property>
+      </properties>
+      <post-processing>
+        <![CDATA[
+          if (properties.get("exitCode") != 0) {
+              properties.put(new java.lang.String("Status"), new java.lang.String("Failure"));
+          }
+          else {
+              properties.put("Status", "Success");
+          }
+       ]]>
+      </post-processing>
+
+      <command program="${GROOVY_HOME}/bin/groovy">
+        <arg value="-cp"/>
+        <arg path="groovy"/>
+        <arg file="groovy/AddDataSources.groovy"/>
+        <arg value="${p:containerHome}"/>
+        <arg value="${p:datasourceFile}"/>
+        <arg value="${p:encryptPassword}"/>
+      </command>
+  </step-type> 
+</plugin>

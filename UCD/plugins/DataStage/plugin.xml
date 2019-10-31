@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<plugin xmlns="http://www.urbancode.com/PluginXMLSchema_v1" xmlns:server="http://www.urbancode.com/PluginServerXMLSchema_v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <header>
+    <identifier id="com.cppib.core.urbancode.plugin.datastage" name="CPPIB DataStage Deploy" version="1"/>
+    <description>
+
+    	This plug-in will deploy Datastage driven by configure file
+    </description>
+    <tag>CPPIB/DATASTAGE</tag>
+  </header>
+  <step-type name="Deploy DataStage Files">
+    <description>This plug-in will deploy Datastage driven by configure file</description>
+    <properties>
+      <property name="dirOffset">
+        <property-ui description="The directory offset relative to the current working directory where the step should run." label="Directory Offset" type="textBox"/>
+      </property>
+      <property name="datastage_project" required="true">
+        <property-ui default-value="${p:datastage_project}" description="DataStage Project" hidden="true" label="DataStage Project" type="textBox"/>
+      </property>
+      <property name="datastage_domain_server" required="true">
+        <property-ui default-value="${p:datastage_domain_server}" description="Datastage Domain Server" hidden="true" label="Datastage Domain Server" type="textBox"/>
+      </property>
+      <property name="datastage_user" required="true">
+        <property-ui default-value="${p:datastage_user}" description="DataStage User" hidden="true" label="DataStage User" type="textBox"/>
+      </property>
+      <property name="datastage_password" required="true">
+        <property-ui default-value="${p:datastage_password}" description="DataStage Password" hidden="true" label="DataStage Password" type="textBox"/>
+      </property>
+    </properties>
+    <!-- This is the standard post processing script. It sets the step to Success if the exit code
+    of the process was 0. Otherwise, the step fails. In order for a step to run correctly, it must
+    have a post processing script and that post processing script must set the status property
+    based off of the exit code. -->
+    <post-processing><![CDATA[
+        if (properties.get("exitCode") != 0) {
+            properties.put(new java.lang.String("Status"), new java.lang.String("Failure"));
+        }
+        else {
+            properties.put("Status", "Success");
+        }
+     ]]></post-processing>
+    <!--The syntax of the command element is such that each argument goes on its own line.  
+    The arg attribute can be "value", "path", or "file". So this command will be:
+    ${PLUGIN_HOME}/uc_dsdeploy.sh ${PLUGIN_INPUT_PROPS} ${PLUGIN_OUTPUT_PROPS} -->
+    <command program="${PLUGIN_HOME}/uc_dsdeploy.sh">
+      <arg value="${p:datastage_project}"/>
+      <arg value="${p:datastage_domain_server}"/>
+      <arg value="${p:datastage_user}"/>
+      <arg value="${p:datastage_password}"/>
+      <arg file="${PLUGIN_INPUT_PROPS}"/>
+      <arg file="${PLUGIN_OUTPUT_PROPS}"/>
+    </command>
+  </step-type> 
+</plugin>

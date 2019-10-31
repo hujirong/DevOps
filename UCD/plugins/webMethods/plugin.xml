@@ -1,0 +1,478 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<plugin xmlns="http://www.urbancode.com/PluginXMLSchema_v1" xmlns:server="http://www.urbancode.com/PluginServerXMLSchema_v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <header>
+    <identifier id="com.cppib.core.urbancode.plugin.webmethods" name="CPPIB WebMethods Deploy" version="12"/>
+    <description>
+    	This plug-in deploys assets to WebMethods server
+    </description>
+    <tag>CPPIB/webMethods</tag>
+  </header>
+  
+  <step-type name="pre-deploy">
+    <description>Validate deploy configuration file, and setup properties</description>
+    
+    <properties>
+      <property name="appName" required="true">
+        <property-ui description="Application name" type="textBox"/>
+      </property>
+      
+      <property name="envName" required="true">
+        <property-ui description="Environment name" type="textBox"/>
+      </property>
+      
+      <property name="stage" required="true">
+        <property-ui description="deployment stage (MNSTART, MNEND, DRYRUN, ALL)" type="textBox"/>
+      </property>
+	  
+      <property name="confFile" required="true">
+        <property-ui default-value="webMethods-deploy.xml" description="webMethods deploy configuration file" label="Deploy Config File" type="textBox"/>
+      </property>
+    </properties>
+    
+    <!-- This is the standard post processing script. It sets the step to Success if the exit code
+    of the process was 0. Otherwise, the step fails. In order for a step to run correctly, it must
+    have a post processing script and that post processing script must set the status property
+    based off of the exit code. -->
+    <post-processing><![CDATA[
+        if (properties.get("exitCode") != 0) {
+            properties.put(new java.lang.String("Status"), new java.lang.String("Failure"));
+        }
+        else {
+            properties.put("Status", "Success");
+        }
+     ]]></post-processing>
+     
+    <command program="${GROOVY_HOME}/bin/groovy">
+      <arg value="-cp"/>
+      <arg path="groovy"/>
+      <arg file="groovy/PreDeploy.groovy"/>
+      <arg file="${PLUGIN_INPUT_PROPS}"/>
+      <arg file="${PLUGIN_OUTPUT_PROPS}"/>
+    </command>
+  </step-type> 
+
+  <step-type name="checkout-svn">
+    <description>Checkout or update SVN repository</description>
+    
+    <properties>
+      <property name="appName" required="true">
+        <property-ui description="Application name" type="textBox"/>
+      </property>
+      
+      <property name="envName" required="true">
+        <property-ui description="Environment name" type="textBox"/>
+      </property>
+      
+      <property name="svnUrl" required="true">
+        <property-ui description="SVN repository URL" type="textBox"/>
+      </property>
+    </properties>
+    
+    <post-processing><![CDATA[
+        if (properties.get("exitCode") != 0) {
+            properties.put(new java.lang.String("Status"), new java.lang.String("Failure"));
+        }
+        else {
+            properties.put("Status", "Success");
+        }
+     ]]></post-processing>
+     
+    <command program="/var/lib/ibm-ucd/bin/svn-update.sh">
+      <arg value="${p:appName}"/>
+      <arg value="${p:envName}"/>
+      <arg value="${p:svnUrl}"/>
+    </command>
+  </step-type> 
+  
+  <step-type name="build-ABE-IS">
+    <description>Build ABE packages for IS</description>
+    
+    <properties>
+      <property name="appName" required="true">
+        <property-ui description="Application name" type="textBox"/>
+      </property>
+      
+      <property name="envName" required="true">
+        <property-ui description="Environment name" type="textBox"/>
+      </property>
+      
+      <property name="IS_packages" required="true">
+        <property-ui description="IS package names" type="textBox"/>
+      </property>
+      
+      <property name="SVN_Tag" required="false">
+        <property-ui description="SVN Tag" type="textBox"/>
+      </property>
+    </properties>
+    
+    <post-processing><![CDATA[
+        if (properties.get("exitCode") != 0) {
+            properties.put(new java.lang.String("Status"), new java.lang.String("Failure"));
+        }
+        else {
+            properties.put("Status", "Success");
+        }
+     ]]></post-processing>
+     
+    <command program="/var/lib/ibm-ucd/bin/abe-IS.sh">
+      <arg value="${p:appName}"/>
+      <arg value="${p:envName}"/>
+      <arg value="${p:IS_packages}"/>
+      <arg value="${p:SVN_Tag}"/>
+    </command>
+  </step-type> 
+  
+  <step-type name="build-ABE-BPM">
+    <description>Build ABE packages for BPM</description>
+    
+    <properties>
+      <property name="appName" required="true">
+        <property-ui description="Application name" type="textBox"/>
+      </property>
+      
+      <property name="envName" required="true">
+        <property-ui description="Environment name" type="textBox"/>
+      </property>
+    </properties>
+    
+    <post-processing><![CDATA[
+        if (properties.get("exitCode") != 0) {
+            properties.put(new java.lang.String("Status"), new java.lang.String("Failure"));
+        }
+        else {
+            properties.put("Status", "Success");
+        }
+     ]]></post-processing>
+     
+    <command program="/var/lib/ibm-ucd/bin/abe-BPM.sh">
+      <arg value="${p:appName}"/>
+      <arg value="${p:envName}"/>
+    </command>
+  </step-type> 
+  
+  <step-type name="build-ABE-CAF">
+    <description>Build ABE packages for CAF</description>
+    
+    <properties>
+      <property name="appName" required="true">
+        <property-ui description="Application name" type="textBox"/>
+      </property>
+      
+      <property name="envName" required="true">
+        <property-ui description="Environment name" type="textBox"/>
+      </property>
+    </properties>
+    
+    <post-processing><![CDATA[
+        if (properties.get("exitCode") != 0) {
+            properties.put(new java.lang.String("Status"), new java.lang.String("Failure"));
+        }
+        else {
+            properties.put("Status", "Success");
+        }
+     ]]></post-processing>
+     
+    <command program="/var/lib/ibm-ucd/bin/abe-CAF.sh">
+      <arg value="${p:appName}"/>
+      <arg value="${p:envName}"/>
+    </command>
+  </step-type> 
+  
+  <step-type name="build-project-IS">
+    <description>Build IS project file for wmdeployer</description>
+    
+    <properties>
+      <property name="jobDir" required="true">
+        <property-ui description="Job directory" type="textBox"/>
+      </property>
+    </properties>
+    
+    <post-processing><![CDATA[
+        if (properties.get("exitCode") != 0) {
+            properties.put(new java.lang.String("Status"), new java.lang.String("Failure"));
+        }
+        else {
+            properties.put("Status", "Success");
+        }
+     ]]></post-processing>
+     
+    <command program="${GROOVY_HOME}/bin/groovy">
+      <arg value="-cp"/>
+      <arg path="groovy"/>
+      <arg file="groovy/BuildProjectIS.groovy"/>
+      <arg value="${p:jobDir}"/>
+    </command>
+  </step-type> 
+  
+  <step-type name="project-automator">
+    <description>Import project file into wmdeployer</description>
+    
+    <properties>
+      <property name="projectFile" required="true">
+        <property-ui description="Project file name" type="textBox"/>
+      </property>
+    </properties>
+    
+    <post-processing><![CDATA[
+        if (properties.get("exitCode") != 0) {
+            properties.put(new java.lang.String("Status"), new java.lang.String("Failure"));
+        }
+        else {
+            properties.put("Status", "Success");
+        }
+     ]]></post-processing>
+     
+    <command program="/var/lib/ibm-ucd/bin/project-automator.sh">
+      <arg value="${p:projectFile}"/>
+    </command>
+  </step-type> 
+  
+  <step-type name="read-property-file">
+    <description>Read properties file</description>
+    
+    <properties>
+      <property name="filePath" required="true">
+        <property-ui description="Property file path" type="textBox"/>
+      </property>
+    </properties>
+    
+    <post-processing><![CDATA[
+        if (properties.get("exitCode") != 0) {
+            properties.put(new java.lang.String("Status"), new java.lang.String("Failure"));
+        }
+        else {
+            properties.put("Status", "Success");
+        }
+     ]]></post-processing>
+     
+    <command program="${GROOVY_HOME}/bin/groovy">
+      <arg value="-cp"/>
+      <arg path="groovy"/>
+      <arg file="groovy/ReadPropertyFile.groovy"/>
+      <arg value="${p:filePath}"/>
+      <arg file="${PLUGIN_OUTPUT_PROPS}"/>
+    </command>
+  </step-type> 
+
+  <step-type name="deploy-project-IS">
+    <description>Deploy IS project</description>
+    
+    <properties>
+      <property name="projectIS" required="true">
+        <property-ui description="IS project name" type="textBox"/>
+      </property>
+      <property name="candidateIS" required="true">
+        <property-ui description="IS deploy candidate" type="textBox"/>
+      </property>
+      <property name="jobDir" required="true">
+        <property-ui description="Job directory" type="textBox"/>
+      </property>
+    </properties>
+    
+    <post-processing><![CDATA[
+        if (properties.get("exitCode") != 0) {
+            properties.put(new java.lang.String("Status"), new java.lang.String("Failure"));
+        }
+        else {
+            properties.put("Status", "Success");
+        }
+     ]]></post-processing>
+     
+    <command program="${GROOVY_HOME}/bin/groovy">
+      <arg value="-cp"/>
+      <arg path="groovy"/>
+      <arg file="groovy/DeployProjectIS.groovy"/>
+      <arg value="${p:projectIS}"/>
+      <arg value="${p:candidateIS}"/>
+      <arg value="${p:jobDir}"/>
+    </command>
+  </step-type> 
+  
+  <step-type name="mnstart-IS">
+    <description>IS maintenance start</description>
+    
+    <properties>
+      <property name="mnfile" required="true">
+        <property-ui description="Maintenance package file" type="textBox"/>
+      </property>
+      <property name="servers" required="true">
+        <property-ui description="IS servers" type="textBox"/>
+      </property>
+    </properties>
+    
+    <post-processing><![CDATA[
+        if (properties.get("exitCode") != 0) {
+            properties.put(new java.lang.String("Status"), new java.lang.String("Failure"));
+        }
+        else {
+            properties.put("Status", "Success");
+        }
+     ]]></post-processing>
+     
+    <command program="/var/lib/ibm-ucd/bin/maintenance-IS.sh">
+      <arg value="start"/>
+      <arg value="${p:mnfile}"/>
+      <arg value="${p:servers}"/>
+    </command>
+  </step-type> 
+  
+  <step-type name="mnend-IS">
+    <description>IS maintenance end</description>
+    
+    <properties>
+      <property name="mnfile" required="true">
+        <property-ui description="Maintenance package file" type="textBox"/>
+      </property>
+      <property name="servers" required="true">
+        <property-ui description="IS servers" type="textBox"/>
+      </property>
+    </properties>
+    
+    <post-processing><![CDATA[
+        if (properties.get("exitCode") != 0) {
+            properties.put(new java.lang.String("Status"), new java.lang.String("Failure"));
+        }
+        else {
+            properties.put("Status", "Success");
+        }
+     ]]></post-processing>
+     
+    <command program="/var/lib/ibm-ucd/bin/maintenance-IS.sh">
+      <arg value="end"/>
+      <arg value="${p:mnfile}"/>
+      <arg value="${p:servers}"/>
+    </command>
+  </step-type> 
+  
+  <step-type name="deploy-project-BPM">
+    <description>Deploy BPM project</description>
+    
+    <properties>
+      <property name="projectBPM" required="true">
+        <property-ui description="BPM project name" type="textBox"/>
+      </property>
+      <property name="candidateBPM" required="true">
+        <property-ui description="BPM deploy candidate" type="textBox"/>
+      </property>
+      <property name="jobDir" required="true">
+        <property-ui description="Job directory" type="textBox"/>
+      </property>
+    </properties>
+    
+    <post-processing><![CDATA[
+        if (properties.get("exitCode") != 0) {
+            properties.put(new java.lang.String("Status"), new java.lang.String("Failure"));
+        }
+        else {
+            properties.put("Status", "Success");
+        }
+     ]]></post-processing>
+     
+    <command program="${GROOVY_HOME}/bin/groovy">
+      <arg value="-cp"/>
+      <arg path="groovy"/>
+      <arg file="groovy/DeployProjectBPM.groovy"/>
+      <arg value="${p:projectBPM}"/>
+      <arg value="${p:candidateBPM}"/>
+      <arg value="${p:jobDir}"/>
+    </command>
+  </step-type> 
+  
+  <step-type name="deploy-projects-CAF">
+    <description>Deploy multiple CAF projects</description>
+    
+    <properties>
+      <property name="deployPropsFile" required="true">
+        <property-ui description="Deploy properties file" type="textBox"/>
+      </property>
+    </properties>
+    
+    <post-processing><![CDATA[
+        if (properties.get("exitCode") != 0) {
+            properties.put(new java.lang.String("Status"), new java.lang.String("Failure"));
+        }
+        else {
+            properties.put("Status", "Success");
+        }
+     ]]></post-processing>
+     
+    <command program="${GROOVY_HOME}/bin/groovy">
+      <arg value="-cp"/>
+      <arg path="groovy"/>
+      <arg file="groovy/DeployProjectsCAF.groovy"/>
+      <arg value="${p:deployPropsFile}"/>
+      <arg file="${PLUGIN_OUTPUT_PROPS}"/>
+    </command>
+  </step-type> 
+  
+  <step-type name="deploy-Broker">
+    <description>Deploy Broker assets</description>
+    
+    <properties>
+      <property name="sourceBrokerFile" required="true">
+        <property-ui description="Source broker assets file" type="textBox"/>
+      </property>
+      <property name="deployPropsFile" required="true">
+        <property-ui description="deploy properties file" type="textBox"/>
+      </property>
+      <property name="jobDir" required="true">
+        <property-ui description="Job directory" type="textBox"/>
+      </property>
+    </properties>
+    
+    <post-processing><![CDATA[
+        if (properties.get("exitCode") != 0) {
+            properties.put(new java.lang.String("Status"), new java.lang.String("Failure"));
+        }
+        else {
+            properties.put("Status", "Success");
+        }
+     ]]></post-processing>
+     
+    <command program="/var/lib/ibm-ucd/bin/webmethods-toolkit/broker-toolkit.sh">
+      <arg value="deploy"/>
+      <arg value="-ENVF"/>
+      <arg value="${p:deployPropsFile}"/>
+      <arg value="-OUTD"/>
+      <arg value="${p:jobDir}"/>
+      <arg value="-SRC_ASSET"/>
+      <arg value="${p:sourceBrokerFile}"/>
+    </command>
+  </step-type> 
+  
+  <step-type name="compare-Broker">
+    <description>Deploy Broker assets</description>
+    
+    <properties>
+      <property name="sourceBrokerFile" required="true">
+        <property-ui description="Source broker assets file" type="textBox"/>
+      </property>
+      <property name="deployPropsFile" required="true">
+        <property-ui description="deploy properties file" type="textBox"/>
+      </property>
+      <property name="jobDir" required="true">
+        <property-ui description="Job directory" type="textBox"/>
+      </property>
+    </properties>
+    
+    <post-processing><![CDATA[
+        if (properties.get("exitCode") != 0) {
+            properties.put(new java.lang.String("Status"), new java.lang.String("Failure"));
+        }
+        else {
+            properties.put("Status", "Success");
+        }
+     ]]></post-processing>
+     
+    <command program="/var/lib/ibm-ucd/bin/webmethods-toolkit/broker-toolkit.sh">
+      <arg value="compare"/>
+      <arg value="-ENVF"/>
+      <arg value="${p:deployPropsFile}"/>
+      <arg value="-OUTD"/>
+      <arg value="${p:jobDir}"/>
+      <arg value="-SRC_ASSET"/>
+      <arg value="${p:sourceBrokerFile}"/>
+    </command>
+  </step-type> 
+</plugin>

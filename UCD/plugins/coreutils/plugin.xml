@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://www.urbancode.com/PluginXMLSchema_v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <header>
+    <identifier id="com.cppib.core.urbancode.plugin.coreutils" version="1" name="CPPIB CoreUtils" />
+    <description>The plug-in will cover several common steps used in CPPIB UrbanCode</description>
+    <tag>CPPIB/CoreUtils</tag>
+  </header>  
+  <step-type name="GetEnvironmentType">
+    <description>Get environment type of an environment.</description>
+    <properties>
+      <property name="ucEnv" required="true">
+		    <property-ui type="textBox" description="name of the environment" default-value="${p:environment.name}" label="Environment Name" />
+	    </property>
+	    <property name="ucApp" required="true">
+		    <property-ui type="textBox" description="name of the application" default-value="${p:application.name}" label="Application Name"/>
+	    </property>      
+    </properties>
+    <post-processing>
+      <![CDATA[
+        if (properties.get("exitCode") != 0) {
+            properties.put("Status", "Failure");
+        }
+        else {
+            properties.put("Status", "Success");
+        }
+     ]]>
+    </post-processing>
+    <command program="${GROOVY_HOME}/bin/groovy">
+      <arg value="-cp"/>
+      <arg path="classes:lib/commons-codec.jar:lib/httpclient.jar:lib/httpcore.jar:lib/HttpComponents-Util.jar:lib/CommonsUtil.jar:lib/uDeployRestClient.jar:lib/commons-lang3.jar"/>
+      <arg file="getEnvType.groovy"/>
+      <arg file="${PLUGIN_INPUT_PROPS}"/>
+      <arg file="${PLUGIN_OUTPUT_PROPS}"/>
+    </command>
+  </step-type>
+  <step-type name="ReceiveDBBackupInfo">
+    <description>Receive Database backup file information(i.e. Backupfolder, DataTimeStamp, and RFCNumber.</description>
+    <properties>
+      <property name="database" required="true">
+			<property-ui type="selectBox" default-value="oracle" description="database type"/>				 	
+			 	<value label="Oracle">Oracle</value>
+		  	<value label="Microsoft SQL Server">MSSQL</value>        
+		  </property>
+      <property name="environmenttype" required="true">
+		    <property-ui type="textBox" description="type of the environment" default-value="${p:environment.type}" label="Environment Type" />
+	    </property>
+	    <property name="ITAMTeamName" required="true">
+		    <property-ui type="textBox" description="ITAM Team Name" default-value="${p:ITAMTeamName}" label="ITAM Team Name"/>  
+	    </property>      
+      <property name="RFC" required="false">
+				<property-ui type="textBox" description="RFC #" default-value="${p:bmc_number}" />
+			</property>    
+    </properties>
+    <post-processing>
+      <![CDATA[
+        if (properties.get("exitCode") != 0) {
+            properties.put("Status", "Failure");
+        }
+        else {
+            properties.put("Status", "Success");
+        }
+     ]]>
+    </post-processing>
+    <command program="${GROOVY_HOME}/bin/groovy">
+      <arg value="-cp"/>
+      <arg path="classes:lib/commons-codec.jar:lib/httpclient.jar:lib/httpcore.jar:lib/HttpComponents-Util.jar:lib/CommonsUtil.jar:lib/uDeployRestClient.jar:lib/commons-lang3.jar"/>
+      <arg file="receiveDBInfo.groovy"/>
+      <arg file="${PLUGIN_INPUT_PROPS}"/>
+      <arg file="${PLUGIN_OUTPUT_PROPS}"/>
+    </command>
+  </step-type> 
+  <step-type name="FTPDBBackup">
+    <description>SFTP Database backup file to a SFTP server.</description>
+    <properties>      
+      <property name="environmenttype" required="true">
+		    <property-ui type="textBox" description="type of the environment" default-value="${p:environment.type}" label="Environment Type" />
+	    </property>
+	    <property name="ITAMTeamName" required="true">
+		    <property-ui type="textBox" description="ITAM Team Name" default-value="${p:ITAMTeamName}" label="ITAM Team Name"/>  
+	    </property>      
+      <property name="SchemaName" required="true">
+				<property-ui type="textBox" description="SchemaName or DB Name " default-value="${p:SchemaName}" label="SchemaName or DB Name" />
+			</property>    
+    </properties>
+    <post-processing>
+      <![CDATA[
+        if (properties.get("exitCode") != 0) {
+            properties.put("Status", "Failure");
+        }
+        else {
+            properties.put("Status", "Success");
+        }
+     ]]>
+    </post-processing>
+    <command program="${GROOVY_HOME}/bin/groovy">
+      <arg value="-cp"/>
+      <arg path="classes:lib/commons-io-1.4.jar:lib/jsch-0.1.51.jar:lib/sshoogr-0.9.16.jar:lib/commons-codec.jar:lib/httpclient.jar:lib/httpcore.jar:lib/HttpComponents-Util.jar:lib/CommonsUtil.jar:lib/uDeployRestClient.jar:lib/commons-lang3.jar"/>
+      <arg file="ftpDBBackup.groovy"/>
+      <arg file="${PLUGIN_INPUT_PROPS}"/>
+      <arg file="${PLUGIN_OUTPUT_PROPS}"/>
+    </command>
+  </step-type> 
+</plugin>

@@ -1,0 +1,14 @@
+repo_name, access
+TF-InvestmentsPortal-IDCC/AggregationService-Views, admin
+TF-InvestmentsPortal-IDCC/IDCC-Database-TaxoTableAQMessage, admin
+TF-InvestmentsPortal-IDCC/IDCC-iWidget-IssueManagment_BetaConcentration, admin
+TF-InvestmentsPortal-IDCC/IDCC-iWidget-IssueManagment_BIP, admin
+TF-InvestmentsPortal-IDCC/IDCC-iWidget-IssueManagment_CollateralDisputes, admin
+TF-InvestmentsPortal-IDCC/IDCC-iWidget-IssueManagment_IDCC, admin
+TF-InvestmentsPortal-IDCC/IDCC-iWidget-IssueManagment_KDP, admin
+TF-InvestmentsPortal-IDCC/IDCC-iWidget-TradeRestriction, admin
+TF-InvestmentsPortal-IDCC/IDCC-LocalDevelopment, admin
+TF-InvestmentsPortal-IDCC/IDCC-ng_iWidget_BoilerPlate, admin
+TF-InvestmentsPortal-IDCC/IDCC-TFS, admin
+TF-InvestmentsPortal-IDCC/IDCC_Service-CreditCounterpartyService, admin
+TF-InvestmentsPortal-IDCC/TF-InvestmentsPortal-IDCC-IDCC_Service-BetaConcentratonService, admin

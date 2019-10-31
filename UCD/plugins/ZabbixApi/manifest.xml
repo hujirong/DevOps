@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pluginInfo>
+  <author>
+    <name>CPPIB</name>
+    <email>zabbix_support@cppib.ca</email>
+    <website>https://wiki.cppib.ca:8443/display/CORE/APM+-+Zabbix+Application+Monitoring</website>
+  </author>
+  <licenses>
+    <license></license>
+  </licenses>
+  <integrationType>Deploy</integrationType>
+  <categories>
+    <category>database</category>
+   <category>Zabbix</category>
+  </categories>
+  <versions>
+    <version name="15">
+	  <releaseNote>
+The Zabbix API plugin is an automation based plugin. It is executed as part of the deployment to help manage Zabbix Application Monitoring integration.</releaseNote>
+    </version>
+  </versions>
+</pluginInfo>

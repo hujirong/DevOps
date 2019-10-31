@@ -1,14 +1,293 @@
-﻿################################################################################
+################################################################################
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
 /C#/DevOps/.vs/DevOps/v16/Server/sqlite3
-/C#/DevOps/GitHub/bin/Debug
-/C#/DevOps/GitHub/obj/Debug
-/C#/DevOps/Nexus/bin/Debug
+/C#/DevOps/GitHub/bin
+/C#/DevOps/GitHub/obj
+/C#/DevOps/Nexus/bin
 /C#/DevOps/packages/RestSharp.106.5.4
-/C#/DevOps/Nexus/obj/Debug
-/C#/DevOps/RESTLibrary/bin/Debug
-/C#/DevOps/RESTLibrary/obj/Debug
-/C#/DevOps/UCD/bin/Debug
-/C#/DevOps/UCD/obj/Debug
+/C#/DevOps/Nexus/obj
+/C#/DevOps/RESTLibrary/bin
+/C#/DevOps/RESTLibrary/obj
+/C#/DevOps/UCD/bin
+/C#/DevOps/UCD/obj
+/Gradle/JavaQuickStart/build
+
+# Java
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+## Perl
+
+Skip to content
+Search or jump to…
+
+Pull requests
+Issues
+Marketplace
+Explore
+ 
+@hujirong 
+2.9k
+91.1k46.4kgithub/gitignore
+ Code Pull requests 119 Actions Projects 0 Security Insights
+gitignore/Perl.gitignore
+@jsoref jsoref spelling: utils
+657c2b3 on Nov 7, 2017
+@karenetheridge@sshaw@russoz@sammysfo@nkh@kappa@jsoref@shiftkey
+36 lines (29 sloc)  321 Bytes
+  
+!Build/
+.last_cover_stats
+/META.yml
+/META.json
+/MYMETA.*
+*.o
+*.pm.tdy
+*.bs
+
+# Devel::Cover
+cover_db/
+
+# Devel::NYTProf
+nytprof.out
+
+# Dizt::Zilla
+/.build/
+
+# Module::Build
+_build/
+Build
+Build.bat
+
+# Module::Install
+inc/
+
+# ExtUtils::MakeMaker
+/blib/
+/_eumm/
+/*.gz
+/Makefile
+/Makefile.old
+/MANIFEST.bak
+/pm_to_blib
+/*.zip
+© 2019 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Help
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
+
+
+## Ruby
+
+Skip to content
+Search or jump to…
+
+Pull requests
+Issues
+Marketplace
+Explore
+ 
+@hujirong 
+2.9k
+91.1k46.4kgithub/gitignore
+ Code Pull requests 119 Actions Projects 0 Security Insights
+gitignore/Ruby.gitignore
+@sshaw sshaw Ruby: ignore RuboCop remote inherited config files (#3197)
+baf1355 27 days ago
+@elifoster@arcresu@weppos@hboon@todd@sshaw@polamjag@rondevera@pvande@peat@locofocos@defunkt@jutaz@amrnt
+57 lines (47 sloc)  1.18 KB
+  
+*.gem
+*.rbc
+/.config
+/coverage/
+/InstalledFiles
+/pkg/
+/spec/reports/
+/spec/examples.txt
+/test/tmp/
+/test/version_tmp/
+/tmp/
+
+# Used by dotenv library to load environment variables.
+# .env
+
+# Ignore Byebug command history file.
+.byebug_history
+
+## Specific to RubyMotion:
+.dat*
+.repl_history
+build/
+*.bridgesupport
+build-iPhoneOS/
+build-iPhoneSimulator/
+
+## Specific to RubyMotion (use of CocoaPods):
+#
+# We recommend against adding the Pods directory to your .gitignore. However
+# you should judge for yourself, the pros and cons are mentioned at:
+# https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control
+#
+# vendor/Pods/
+
+## Documentation cache and generated files:
+/.yardoc/
+/_yardoc/
+/doc/
+/rdoc/
+
+## Environment normalization:
+/.bundle/
+/vendor/bundle
+/lib/bundler/man/
+
+# for a library or gem, you might want to ignore these files since the code is
+# intended to run in multiple environments; otherwise, check them in:
+# Gemfile.lock
+# .ruby-version
+# .ruby-gemset
+
+# unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
+.rvmrc
+
+# Used by RuboCop. Remote config files pulled in from inherit_from directive.
+# .rubocop-https?--*
+© 2019 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Help
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
+
+
+## Groovy
+target
+build
+out
+*.DS_Store
+*~
+.gradle
+*.iml
+*.ipr
+*.iws
+.idea
+.*.swp
+*.class
+/bin
+user.gradle
+/.settings
+*.classpath
+*.project
+
+/subprojects/groovy-ant/bin
+/subprojects/groovy-ant/.project
+/subprojects/groovy-ant/.settings
+/subprojects/groovy-ant/.classpath
+/subprojects/groovy-bsf/bin
+/subprojects/groovy-bsf/.project
+/subprojects/groovy-bsf/.settings
+/subprojects/groovy-bsf/.classpath
+/subprojects/groovy-console/bin
+/subprojects/groovy-console/.project
+/subprojects/groovy-console/.settings
+/subprojects/groovy-console/.classpath
+/subprojects/groovy-docgenerator/bin
+/subprojects/groovy-docgenerator/.project
+/subprojects/groovy-docgenerator/.settings
+/subprojects/groovy-docgenerator/.classpath
+/subprojects/groovy-groovydoc/bin
+/subprojects/groovy-groovydoc/.project
+/subprojects/groovy-groovydoc/.settings
+/subprojects/groovy-groovydoc/.classpath
+/subprojects/groovy-groovysh/bin
+/subprojects/groovy-groovysh/.project
+/subprojects/groovy-groovysh/.settings
+/subprojects/groovy-groovysh/.classpath
+/subprojects/groovy-jmx/bin
+/subprojects/groovy-jmx/.project
+/subprojects/groovy-jmx/.settings
+/subprojects/groovy-jmx/.classpath
+/subprojects/groovy-json/bin
+/subprojects/groovy-json/.project
+/subprojects/groovy-json/.settings
+/subprojects/groovy-json/.classpath
+/subprojects/groovy-jsr223/bin
+/subprojects/groovy-jsr223/.project
+/subprojects/groovy-jsr223/.settings
+/subprojects/groovy-jsr223/.classpath
+/subprojects/groovy-nio/bin
+/subprojects/groovy-nio/.project
+/subprojects/groovy-nio/.settings
+/subprojects/groovy-nio/.classpath
+/subprojects/groovy-servlet/bin
+/subprojects/groovy-servlet/.project
+/subprojects/groovy-servlet/.settings
+/subprojects/groovy-servlet/.classpath
+/subprojects/groovy-sql/bin
+/subprojects/groovy-sql/.project
+/subprojects/groovy-sql/.settings
+/subprojects/groovy-sql/.classpath
+/subprojects/groovy-swing/bin
+/subprojects/groovy-swing/.project
+/subprojects/groovy-swing/.settings
+/subprojects/groovy-swing/.classpath
+/subprojects/groovy-templates/bin
+/subprojects/groovy-templates/.project
+/subprojects/groovy-templates/.settings
+/subprojects/groovy-templates/.classpath
+/subprojects/groovy-test/bin
+/subprojects/groovy-test/.project
+/subprojects/groovy-test/.settings
+/subprojects/groovy-test/.classpath
+/subprojects/groovy-testng/bin
+/subprojects/groovy-testng/.project
+/subprojects/groovy-testng/.settings
+/subprojects/groovy-testng/.classpath
+/subprojects/groovy-xml/bin
+/subprojects/groovy-xml/.project
+/subprojects/groovy-xml/.settings
+/subprojects/groovy-xml/.classpath
+
+*.jar
+*.lock
+*.ide
+*.ide-shm
+*.ide-wal

@@ -1,0 +1,7 @@
+repo_name, access
+TF-InvestmentsPortal-Core/EventModule-Database-Repository, admin
+TF-InvestmentsPortal-Core/EventModule-Windows-Service, admin
+TF-InvestmentsPortal-Core/test, admin
+TF-InvestmentsPortal-Core/Testing-Database-TimeMinus30Days, admin
+TF-InvestmentsPortal-Core/Testing-EventModule-ScenarioRunner, admin
+TF-InvestmentsPortal-Core/Webstat, admin

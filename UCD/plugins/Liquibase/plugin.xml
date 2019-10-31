@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<plugin xmlns="http://www.urbancode.com/PluginXMLSchema_v1" xmlns:server="http://www.urbancode.com/PluginServerXMLSchema_v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <header>
+    <identifier id="com.cppib.core.urbancode.plugin.liquibase" name="CPPIB Liquibase" version="3"/>
+    <description>
+      Liquibase is an open source database-independent library for tracking, managing and applying database schema changes.
+	  </description>
+    <tag>CPPIB/Liquibase</tag>
+  </header>
+  <step-type name="Update">
+    <description>updates database to current version.</description>    
+    <properties>
+    
+    <property name="database" required="true">
+			<property-ui type="selectBox" default-value="oracle" description="Target database type"/>				 	
+			 	<value label="Oracle">oracle</value>
+		  	<value label="Microsoft SQL Server">mssql</value>
+        <value label="H2">h2</value>
+		</property>
+    
+    <property name="jdbcURL" required="true">
+		  <property-ui default-value="${p:jdbcURL}" description="Database JDBC URL." type="textBox"/>
+	  </property>
+
+	  <property name="username" required="true">
+		<property-ui default-value="${p:username}" description="Database username" type="textBox"/>
+	  </property>
+
+	  <property name="password" required="true">
+		<property-ui default-value="${p:password}" description="Password for given username." type="textBox"/>
+	  </property>
+    
+    <property name="jarFile" required="true">
+		<property-ui default-value="${p:component/artifactId}-${p:version.name}.jar" description="The changelog jar file to use." type="textBox"/>
+	  </property>
+
+	  <property name="changeLogFile" required="true">
+		<property-ui default-value="${p:changeLogFile}" description="The changelog file to use." type="textBox"/>
+	  </property>  
+
+	  <property name="preview" required="false">
+		<property-ui description="If true, update script will be printed but not applied." type="checkBox"/>
+	  </property>
+    </properties>    
+    <post-processing><![CDATA[
+			if (properties.get("exitCode") != 0) {
+				properties.put(new java.lang.String("Status"), new java.lang.String("Failure"));
+			}
+			else {
+				properties.put("Status", "Success");
+			}
+		 ]]></post-processing> 
+    <command program="${GROOVY_HOME}/bin/groovy">
+      <arg value="-cp"/>
+      <arg path="classes:lib/liquibase.jar"/>
+	  <arg file="update.groovy"/>
+	  <arg file="${PLUGIN_INPUT_PROPS}"/>
+	  <arg file="${PLUGIN_OUTPUT_PROPS}"/>
+    </command>
+  </step-type> 
+  <step-type name="Rollback">
+		<description>Rolls back change sets.</description>
+		<properties>
+    
+      <property name="database" required="true">
+				<property-ui type="selectBox" default-value="oracle" description="Target database type" />				 	
+				 	<value label="Oracle">oracle</value>
+				 	<value label="Microsoft SQL Server">mssql</value>
+          <value label="H2">h2</value>
+			</property>
+
+			<property name="jdbcURL" required="true">
+				<property-ui type="textBox" description="Database JDBC URL." default-value="${p:jdbcURL}" />
+			</property>
+
+			<property name="username" required="true">
+				<property-ui type="textBox" description="Database username" default-value="${p:username}" />
+			</property>
+
+			<property name="password" required="true">
+				<property-ui type="textBox" description="Password for given username." default-value="${p:password}" />
+			</property>
+
+			<property name="changeLogFile" required="true">
+				<property-ui type="textBox" description="The changelog file to use." default-value="${p:changeLogFile}" />
+			</property>
+
+			<property name="rollbackType" required="true">
+				<property-ui type="selectBox" default-value="count" description="It is possible to rollback to specific date, tag or by given number of changesets."/>
+				 	<value label="Number of changesets">count</value>
+				 	<value label="to Date">date</value>
+				 	<value label="to Tag">tag</value>
+			</property>
+
+			<property name="rollbackValue" required="true">
+				<property-ui type="textBox" description="Number of changesets/Date ('yyyy-MM-dd'T'HH:mm:ss')/Tag depending on rollback type selected." />
+			</property>
+
+			<property name="preview" required="false">
+				<property-ui type="checkBox" description="If true, rollback script will be printed but not applied." />
+			</property>
+
+		</properties>
+    <post-processing><![CDATA[
+			if (properties.get("exitCode") != 0) {
+				properties.put(new java.lang.String("Status"), new java.lang.String("Failure"));
+			}
+			else {
+				properties.put("Status", "Success");
+			}
+		 ]]></post-processing>		
+		<command program="${GROOVY_HOME}/bin/groovy">
+			<arg value="-cp"/>
+			<arg path="classes:lib/liquibase.jar"/>
+			<arg file="rollback.groovy"/>
+			<arg file="${PLUGIN_INPUT_PROPS}"/>
+			<arg file="${PLUGIN_OUTPUT_PROPS}"/>
+		</command>
+	</step-type>
+  <step-type name="Tag">
+		<description>"Tags" the current database state for future rollback.</description>
+		<properties>
+
+			<property name="database" required="true">
+				<property-ui type="selectBox" default-value="oracle" description="Target database type"/>				 	
+				 	<value label="Oracle">oracle</value>
+				 	<value label="Microsoft SQL Server">mssql</value>
+          <value label="H2">h2</value>
+			</property>
+
+			<property name="jdbcURL" required="true">
+				<property-ui type="textBox" description="Database JDBC URL." default-value="${p:jdbcURL}"/>
+			</property>
+
+			<property name="username" required="true">
+				<property-ui type="textBox" description="Database username" default-value="${p:username}"/>
+			</property>
+
+			<property name="password" required="true">
+				<property-ui type="textBox" description="Password for given username." default-value="${p:password}"/>
+			</property>
+
+      <property name="jarFile" required="true">
+		    <property-ui default-value="${p:component/artifactId}-${p:version.name}.jar" description="The changelog jar file to use." type="textBox"/>
+	    </property>
+    
+			<property name="changeLogFile" required="true">
+				<property-ui type="textBox" description="The changelog file to use." default-value="${p:changeLogFile}"/>
+			</property>
+
+			<property name="tag" required="true">
+				<property-ui type="textBox" description="Tag to use." />
+			</property>
+
+		</properties>
+
+		<post-processing><![CDATA[
+			if (properties.get("exitCode") != 0) {
+				properties.put(new java.lang.String("Status"), new java.lang.String("Failure"));
+			}
+			else {
+				properties.put("Status", "Success");
+			}
+		 ]]></post-processing>
+		<command program="${GROOVY_HOME}/bin/groovy">
+			<arg value="-cp"/>
+			<arg path="classes:lib/liquibase.jar"/>
+			<arg file="tag.groovy"/>
+			<arg file="${PLUGIN_INPUT_PROPS}"/>
+			<arg file="${PLUGIN_OUTPUT_PROPS}"/>
+		</command>
+	</step-type> 
+</plugin>

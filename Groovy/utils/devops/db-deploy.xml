@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+- This file is used to control running SQL scripts in different environments
+- Developers create this file and upload it with all SQL script files onto artifactory.
+-
+- In UrbanCode Deploy we have two generic processes to run SQL scripts:
+-    DeployOracle: run SQL scripts to Oracle database
+-    DeploySQLServer: run SQL scripts to SQL Server database
+-
+- The process requires the paramerter dbdeploy_file. It loads the SQL files for
+- different environment, and passes it to database client plugin to execute.
+-->
+<dbdeploy>
+  <!-- run SQL scripts on DEV -->
+  <env name="DEV">
+    <file>updates-4.sql</file>
+  </env>
+
+  <!-- run SQL scripts on QA -->
+  <env name="QA">
+    <file>updates-3.sql</file>
+    <file>updates-4.sql</file>
+  </env>
+
+  <!-- run SQL scripts on UAT -->
+  <env name="UAT">
+    <file>updates-2.sql</file>
+    <file>updates-3.sql</file>
+    <file>updates-4.sql</file>
+  </env>
+
+  <!-- run SQL scripts on PROD -->
+  <env name="PROD">
+    <file>updates-1.sql</file>
+    <file>updates-2.sql</file>
+    <file>updates-3.sql</file>
+    <file>updates-4.sql</file>
+  </env>
+</dbdeploy>

@@ -1,0 +1,4 @@
+repo_name, access
+EC-ReportRegistry/ReportRegistry.Tibco, admin
+EC-ReportRegistry/ReportRegistryNotification, admin
+EC-ReportRegistry/ReportRegistryService, admin

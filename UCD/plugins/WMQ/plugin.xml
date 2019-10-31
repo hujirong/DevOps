@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<plugin xmlns="http://www.urbancode.com/PluginXMLSchema_v1" xmlns:server="http://www.urbancode.com/PluginServerXMLSchema_v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <header>
+    <identifier id="com.cppib.core.urbancode.plugin.wmq" name="WMQ Configure Queue" version="2"/>
+    <description>
+      This plug-in will enable/disable put/get of a WMQ queue
+	  </description>
+    <tag>CPPIB/WMQ</tag>
+  </header>
+  <step-type name="Configure a Queue">
+    <description>Enable or Disable the PUT/GET of a Queue</description>
+    <properties>
+      <property name="dirOffset">
+        <property-ui description="The directory offset relative to the current working directory where the step should run." label="Directory Offset" type="textBox"/>
+      </property>
+      <property name="QueueAttribute" required="true">
+        <property-ui default-value="" description="Queue Attribute" label="Queue Attribute" type="selectBox"/>
+        <value label="GET">GET</value>
+        <value label="PUT">PUT</value>
+      </property>
+      <property name="QueueAttributeValue" required="true">
+        <property-ui description="Queue Attribute Value" label="Queue Attribute Value" type="selectBox"/>
+        <value label="ENABLED">ENABLED</value>
+        <value label="DISABLED">DISABLED</value>
+      </property>
+      <property name="QueueManager" required="true">
+        <property-ui description="Queue Manager" label="Queue Manager" type="textBox"/>
+      </property>
+      <property name="Queue" required="true">
+        <property-ui description="Queue Name" label="Queue Name" type="textBox"/>
+      </property>
+      <property name="UserID" required="true">
+        <property-ui default-value="${p:resource/mqappid}" description="User ID" hidden="true" label="User ID" type="textBox"/>
+      </property>
+    </properties>
+    <post-processing>
+        if (properties.get("exitCode") != 0) {
+            properties.put(new java.lang.String("Status"), new java.lang.String("Failure"));
+        }
+        else {
+            properties.put("Status", "Success");
+        }
+     </post-processing>
+    <command program="${PLUGIN_HOME}/cfgMQ.sh">
+      <arg value="${p:QueueAttribute}"/>
+      <arg value="${p:QueueAttributeValue}"/>
+      <arg value="${p:QueueManager}"/>
+      <arg value="${p:Queue}"/>
+      <arg value="${p:UserID}"/>
+      <arg file="${PLUGIN_INPUT_PROPS}"/>
+      <arg file="${PLUGIN_OUTPUT_PROPS}"/>
+    </command>
+  </step-type>
+</plugin>

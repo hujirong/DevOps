@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<plugin xmlns="http://www.urbancode.com/PluginXMLSchema_v1" xmlns:server="http://www.urbancode.com/PluginServerXMLSchema_v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <header>
+    <identifier id="com.cppib.core.urbancode.plugin.fileutils" name="CPPIB File Utilities" version="4"/>
+    <description>
+    	This is CPPIB version of FileUtils Plugin
+    </description>
+    <tag>CPPIB/FileUtils</tag>
+  </header>
+  
+  <step-type name="replace-tokens-properties">
+      <description>Replace tokens for properties file.</description>
+      <properties>
+        <property name="propFile" required="true">
+          <property-ui description="Properties file contains tokens." label="Properties File" type="textBox"/>
+        </property>
+        <property name="startDelimiter">
+          <property-ui default-value="@" description="The start delimiter character used to identify tokens." label="Start Token Delimiter" type="textBox"/>
+        </property>
+        <property name="endDelimiter">
+          <property-ui default-value="@" description="The end delimiter character used to identify tokens." label="End Token Delimiter" type="textBox"/>
+        </property>
+        <property name="envPropValues">
+          <property-ui default-value="${p:environment/allProperties}" description="Multiple properties name=value separated by ','. Eg: 1. two properties specifically: oracle_url=${p:oracle_url},oracle_password=${p:oracle_password}.                                     2. All environment properties (default): ${p:environment/allProperties}.          3. All environment and resource properties: ${p:environment/allProperties},${p:resource/allProperties}." label="Property List" type="textBox"/>
+        </property>
+        <property name="secureProperties" required="true">
+          <property-ui description="Secure property names. Every line is a property name. This step will encrypt values of these secure properties." label="Secure Properties" type="textAreaBox"/>
+        </property>
+        <property name="DEBUG" required="false">
+          <property-ui default-value="false" description="Print debug messages." type="textBox"/>
+        </property>
+      </properties>
+      <post-processing>
+        <![CDATA[
+          if (properties.get("exitCode") != 0) {
+              properties.put(new java.lang.String("Status"), new java.lang.String("Failure"));
+          }
+          else {
+              properties.put("Status", "Success");
+          }
+       ]]>
+      </post-processing>
+
+      <command program="${GROOVY_HOME}/bin/groovy">
+        <arg value="-cp"/>
+        <arg path="groovy:lib/core-secutils-1.0.jar"/>
+        <arg value="-DSECDEBUG=${p:DEBUG}"/>
+        <arg file="groovy/ReplaceTokensProps.groovy"/>
+        <arg file="${PLUGIN_INPUT_PROPS}"/>
+        <arg file="${PLUGIN_OUTPUT_PROPS}"/>
+      </command>
+  </step-type> 
+
+  <step-type name="replace-tokens">
+      <description>Replace tokens for a text file.</description>
+      <properties>
+        <property name="file" required="true">
+          <property-ui description="Text file contains tokens." type="textBox"/>
+        </property>
+        <property name="startDelimiter">
+          <property-ui default-value="@" description="The start delimiter character used to identify tokens." label="Start Token Delimiter" type="textBox"/>
+        </property>
+        <property name="endDelimiter">
+          <property-ui default-value="@" description="The end delimiter character used to identify tokens." label="End Token Delimiter" type="textBox"/>
+        </property>
+        <property name="envPropValues">
+          <property-ui default-value="${p:environment/allProperties}" description="Multiple properties name=value separated by ','. Eg: 1. two properties specifically: oracle_url=${p:oracle_url},oracle_password=${p:oracle_password}.                                     2. All environment properties (default): ${p:environment/allProperties}.          3. All environment and resource properties: ${p:environment/allProperties},${p:resource/allProperties}." label="Property List" type="textBox"/>
+        </property>
+         <property name="DEBUG" required="false">
+          <property-ui default-value="false" description="Print debug messages." type="textBox"/>
+		 </property>
+     </properties>
+      <post-processing>
+        <![CDATA[
+          if (properties.get("exitCode") != 0) {
+              properties.put(new java.lang.String("Status"), new java.lang.String("Failure"));
+          }
+          else {
+              properties.put("Status", "Success");
+          }
+       ]]>
+      </post-processing>
+
+      <command program="${GROOVY_HOME}/bin/groovy">
+        <arg value="-cp"/>
+        <arg path="groovy:lib/core-secutils-1.0.jar"/>
+        <arg value="-DSECDEBUG=${p:DEBUG}"/>
+        <arg file="groovy/ReplaceTokens.groovy"/>
+        <arg file="${PLUGIN_INPUT_PROPS}"/>
+        <arg file="${PLUGIN_OUTPUT_PROPS}"/>
+      </command>
+  </step-type> 
+
+  <step-type name="set-properties">
+      <description>Set property values in a configuration file.</description>
+      <properties>
+        <property name="propFile" required="true">
+          <property-ui description="Properties file" type="textBox"/>
+        </property>
+        <property name="propValues">
+          <property-ui description="Each line is a pair of name/value like oracle_url = ${p:oracle_url}.          If name starts with '[SEC]', it is treated as secure property and the value will be encrypted." label="Property List" type="textAreaBox"/>
+        </property>
+         <property name="DEBUG" required="false">
+          <property-ui default-value="false" description="Print debug messages." type="textBox"/>
+		 </property>
+      </properties>
+      <post-processing>
+        <![CDATA[
+          if (properties.get("exitCode") != 0) {
+              properties.put(new java.lang.String("Status"), new java.lang.String("Failure"));
+          }
+          else {
+              properties.put("Status", "Success");
+          }
+       ]]>
+      </post-processing>
+
+      <command program="${GROOVY_HOME}/bin/groovy">
+        <arg value="-cp"/>
+        <arg path="groovy:lib/core-secutils-1.0.jar"/>
+        <arg value="-DSECDEBUG=${p:DEBUG}"/>
+        <arg file="groovy/SetProps.groovy"/>
+        <arg file="${PLUGIN_INPUT_PROPS}"/>
+        <arg file="${PLUGIN_OUTPUT_PROPS}"/>
+      </command>
+  </step-type> 
+
+  <step-type name="verify-properties">
+      <description>Verify property values in a configuration file.</description>
+      <properties>
+        <property name="propFile" required="true">
+          <property-ui description="Properties file" type="textBox"/>
+        </property>
+        <property name="propValues">
+          <property-ui description="Each line is a pair of name/value like oracle_url = ${p:oracle_url}.          If name starts with '[SEC]', it is treated as secure property." label="Property List" type="textAreaBox"/>
+        </property>
+         <property name="DEBUG" required="false">
+          <property-ui default-value="false" description="Print debug messages." type="textBox"/>
+		 </property>
+      </properties>
+      <post-processing>
+        <![CDATA[
+          if (properties.get("exitCode") != 0) {
+              properties.put(new java.lang.String("Status"), new java.lang.String("Failure"));
+          }
+          else {
+              properties.put("Status", "Success");
+          }
+       ]]>
+      </post-processing>
+
+      <command program="${GROOVY_HOME}/bin/groovy">
+        <arg value="-cp"/>
+        <arg path="groovy:lib/core-secutils-1.0.jar"/>
+        <arg value="-DSECDEBUG=${p:DEBUG}"/>
+        <arg file="groovy/VerifyProps.groovy"/>
+        <arg file="${PLUGIN_INPUT_PROPS}"/>
+        <arg file="${PLUGIN_OUTPUT_PROPS}"/>
+      </command>
+  </step-type> 
+</plugin>

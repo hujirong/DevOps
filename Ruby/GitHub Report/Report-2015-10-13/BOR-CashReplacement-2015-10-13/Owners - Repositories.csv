@@ -1,0 +1,9 @@
+repo_name, access
+BOR-CashReplacement/findur-outbound-adaptor, admin
+BOR-CashReplacement/quantum-api-sample, admin
+BOR-CashReplacement/quantum-api-wcfservice, admin
+BOR-CashReplacement/quantum-deal-importer-config, admin
+BOR-CashReplacement/quantum-edfasst-wcfservice, admin
+BOR-CashReplacement/quantum-inbound-adaptor, admin
+BOR-CashReplacement/QuantumStaging, admin
+BOR-CashReplacement/QuantumStagingUI, admin

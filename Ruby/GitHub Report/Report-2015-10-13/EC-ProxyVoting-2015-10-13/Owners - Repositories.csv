@@ -1,0 +1,7 @@
+repo_name, access
+EC-ProxyVoting/BlockMeetingUI, admin
+EC-ProxyVoting/ETL.CSV.Validator, admin
+EC-ProxyVoting/GlassLewisImportService, admin
+EC-ProxyVoting/ProxyVotingDataService, admin
+EC-ProxyVoting/ProxyVotingImport, admin
+EC-ProxyVoting/ReconUI, admin

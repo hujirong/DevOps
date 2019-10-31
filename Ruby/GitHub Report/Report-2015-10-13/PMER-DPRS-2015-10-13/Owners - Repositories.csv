@@ -1,0 +1,12 @@
+repo_name, access
+PMER-DPRS/AdministrationSite, admin
+PMER-DPRS/BinaryReferences, admin
+PMER-DPRS/CalculationService, admin
+PMER-DPRS/Cube, admin
+PMER-DPRS/Documentation, admin
+PMER-DPRS/IntegrationScripts, admin
+PMER-DPRS/ProcessingService, admin
+PMER-DPRS/Report, admin
+PMER-DPRS/TaggingService, admin
+PMER-DPRS/TaggingSite, admin
+PMER-DPRS/VerificationService, admin

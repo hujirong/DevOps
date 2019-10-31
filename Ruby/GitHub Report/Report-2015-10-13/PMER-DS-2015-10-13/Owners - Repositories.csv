@@ -1,0 +1,7 @@
+repo_name, access
+PMER-DS/Documentation, admin
+PMER-DS/FinancialInstrumentService, admin
+PMER-DS/MarketReferenceService, admin
+PMER-DS/PortfolioService, admin
+PMER-DS/TransactionService, admin
+PMER-DS/ValuationService, admin

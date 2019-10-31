@@ -1,0 +1,6 @@
+repo_name, access
+EC-IRM/eFront.Config, admin
+EC-IRM/eFront.Listener.Service, admin
+EC-IRM/eFront.Loader.Service, admin
+EC-IRM/LotusNotes.Extract.Service, admin
+EC-IRM/SandPCapitalFacade, admin

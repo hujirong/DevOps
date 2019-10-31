@@ -1,0 +1,9 @@
+repo_name, access
+EC-Sharepoint/ETSDataUpdater, admin
+EC-Sharepoint/ETSDataUpdater.Tibco, admin
+EC-Sharepoint/EVNSPSiteOwners, admin
+EC-Sharepoint/SharePointFacadeService, admin
+EC-Sharepoint/SP-Bridge-Service, admin
+EC-Sharepoint/SP-Event-Handler, admin
+EC-Sharepoint/SPEndecaIndexer, admin
+EC-Sharepoint/SPEVNAdmin, admin

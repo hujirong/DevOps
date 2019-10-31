@@ -1,0 +1,4 @@
+repo_name, access
+Trade-Efficiencies-RepoManager/OTPP.RepoManager.RepoManagerClientApp, admin
+Trade-Efficiencies-RepoManager/OTPP.RepoManager.Service.TIBCO.RepoManagementService, admin
+Trade-Efficiencies-RepoManager/OTPP.RepoManager.Service.TIBCO.RepoMaturityNotification, admin

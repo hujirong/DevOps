@@ -1,0 +1,8 @@
+repo_name, access
+ETS/CheckWMI_PS_Scripts, admin
+ETS/get_wsdl_PS_Script, admin
+ETS/IIS_SVC_Compare_PS_Script, admin
+ETS/Remote_Access_Admin_PS_Script, admin
+ETS/RSR_Deploy_PS_Script, admin
+ETS/Services_and_IIS_Validation_PS_Script, admin
+ETS/setInternetAddress_Agent, admin

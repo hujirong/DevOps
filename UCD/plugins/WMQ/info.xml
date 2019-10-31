@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<pluginInfo xmlns="http://www.urbancode.com/InfoXMLSchema_v1" xmlns:server="http://www.urbancode.com/PluginServerXMLSchema_v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <author name="CORE Technologies">
+    <organization>UrbanCode</organization>
+    <email>info@urbancode.com</email>
+    <website>http://urbancode.com</website>
+    <bio/>
+  </author>
+  <integration type="Deploy"/>
+  <tool-description> </tool-description>
+  <meta-html>
+    <meta content="" name="description"/>
+    <meta content="" name="keywords"/>
+  </meta-html>
+  <release-version>2</release-version>
+  <release-notes>
+    <release-note plugin-version="1">
+
+	  </release-note>
+    <release-note plugin-version="2">add release note content here</release-note>
+  </release-notes>
+</pluginInfo>

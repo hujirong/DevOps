@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://www.urbancode.com/PluginXMLSchema_v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <header>
+    <identifier id="com.cppib.core.urbancode.plugin.zbxapi" name="Zabbix API" version="1"/>
+    <description>The Zabbix API Plugin allows UrbanCode to interact with Zabbix Application Monitoring</description>
+    <tag>CPPIB/ZabbixAPI</tag>
+  </header>
+  <step-type name="MaintenanceStart">
+    <description>Start Zabbix Maintenance</description>
+    <properties>
+      <property name="hostname" required="true">
+        <property-ui type="textAreaBox" label="Maintenance Hostname" description="Name of the host to enter into maintenance" default-value="${p:zabbix_hostname}" />
+      </property>
+      <property name="Description" required="false">
+        <property-ui type="textBox" label="Maintenance Description" description="Maintenance description" default-value="${p:zabbix_description}"  />
+      </property>
+      <property name="appName" required="true">
+        <property-ui type="textBox" label="Application" description="Name of the application to enter into maintenance" default-value="${p:uc_application}" />
+      </property>
+      <property name="envName" required="true">
+        <property-ui type="textBox" label="Environment" description="environment of the application to enter into maintenance" default-value="${p:uc_environment}"  />
+      </property>
+      <property name="Username" required="true">
+        <property-ui type="textBox" label="Username" description="Zabbix API username" default-value="${p:system/zabbix_username}"  />
+      </property>
+      <property name="Password" required="true">
+        <property-ui type="textBox" label="Password" description="Zabbix API password" default-value="${p:system/zabbix_password}" />
+      </property>
+      <property name="checkfile" required="true">
+        <property-ui type="textBox" label="checkfile" description="Zabbix API check file" default-value="${p:system/zabbix_checkfile}" />
+      </property>
+    </properties>
+    <post-processing><![CDATA[
+        properties.put("Status", "Success");
+        if (properties.get("exitCode") != 0) {
+            properties.put("Status", "Failure");
+        }
+     ]]></post-processing>
+    <command program="${GROOVY_HOME}/bin/groovy">
+      <arg file="zbxmstart.groovy"/>
+      <arg file="${PLUGIN_INPUT_PROPS}"/>
+      <arg file="${PLUGIN_OUTPUT_PROPS}"/>
+    </command>
+  </step-type>
+  <step-type name="MaintenanceStop">
+    <description>Stop Zabbix Maintenance</description>
+    <properties>
+      <property name="hostname" required="true">
+        <property-ui type="textAreaBox" label="Maintenance Hostname" description="Name of the host to enter into maintenance" default-value="${p:zabbix_hostname}" />
+      </property>      
+      <property name="appName" required="true">
+        <property-ui type="textBox" label="Application" description="Name of the application to enter into maintenance" default-value="${p:uc_application}" />
+      </property>
+      <property name="envName" required="true">
+        <property-ui type="textBox" label="Environment" description="environment of the application to enter into maintenance" default-value="${p:uc_environment}" />
+      </property>
+      <property name="Username" required="true">
+        <property-ui type="textBox" label="Username" description="Zabbix API username" default-value="${p:system/zabbix_username}" />
+      </property>
+      <property name="Password" required="true">
+        <property-ui type="textBox" label="Password" description="Zabbix API password" default-value="${p:system/zabbix_password}" />
+      </property>
+      <property name="checkfile" required="true">
+        <property-ui type="textBox" label="checkfile" description="Zabbix API check file" default-value="${p:system/zabbix_checkfile}" />
+      </property>
+    </properties>
+    <post-processing><![CDATA[
+        properties.put("Status", "Success");
+        if (properties.get("exitCode") != 0) {
+            properties.put("Status", "Failure");
+        }
+     ]]></post-processing>
+    <command program="${GROOVY_HOME}/bin/groovy">
+      <arg file="zbxmstop.groovy"/>
+      <arg file="${PLUGIN_INPUT_PROPS}"/>
+      <arg file="${PLUGIN_OUTPUT_PROPS}"/>
+    </command>
+  </step-type>  
+  <step-type name="TriggerState">
+    <description>Zabbix Trigger State</description>
+    <properties>
+      <property name="hostname" required="true">
+        <property-ui type="textBox" label="Maintenance Hostname" description="Name of the host to enter into maintenance" default-value="${p:zabbix_hostname}" />
+      </property>    
+      <property name="trigger" required="true">
+        <property-ui type="textBox" label="Trigger" description="Name of the trigger" default-value="${p:zabbix_trigger}" />
+      </property>
+      <property name="timeout" required="false">
+        <property-ui type="textBox" label="Timeout" description="Timeout in seconds waiting for a value" default-value="${p:zabbix_trigger_timeout}" />
+      </property>
+      <property name="Username" required="true">
+        <property-ui type="textBox" label="Username" description="Zabbix API username" default-value="${p:system/zabbix_username}" />
+      </property>
+      <property name="Password" required="true">
+        <property-ui type="textBox" label="Password" description="Zabbix API password" default-value="${p:system/zabbix_password}" />
+      </property>      
+    </properties>    
+    <post-processing><![CDATA[
+        properties.put("Status", "Success");
+        if (properties.get("exitCode") != 0) {
+            properties.put("Status", "Failure");
+        }
+     ]]></post-processing>
+    <command program="${GROOVY_HOME}/bin/groovy">
+      <arg file="zbxtriggerstate.groovy"/>
+      <arg file="${PLUGIN_INPUT_PROPS}"/>
+      <arg file="${PLUGIN_OUTPUT_PROPS}"/>
+    </command>
+  </step-type>
+</plugin>

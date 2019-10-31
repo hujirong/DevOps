@@ -1,0 +1,74 @@
+TE-GSI
+Otpp-InnovationChallenge-TCA
+IT-Efficiencies-Guardium
+IC2015-ApplicationHealth
+ITE-TIBCO6-Testing
+ITE-EnterpriseLogging
+ITE-EL-MetaspacePurgeTool
+ITE-WorkdayCorpDirIntegration
+ITE-WorkdayCorpDirIntegration
+ITE-EDFUtilities
+ITE-EDFUtilities
+ITE-CriticalAlertIntegration
+TE-BI-Utilities
+SE-Templates
+EC-IntranetSearch
+TF-Delphix
+SE-Common
+Trade-Efficiencies-Findur-AVS
+TE-BI-TabularModels
+IT-Efficiencies
+TE-BI-ActiveExposure
+BOR-Utilities
+Trade-Efficiencies-RepoManager
+EC-IRM
+BOR-PrivatePartners
+EDP-EVN
+BOR-SCDRecon-SSISOrchetration-Tibco
+BOR-SCDRecons
+ETS
+TF-InvestmentsPortal-Core
+Total Fund - Investments Portal - Core
+TF-InvestmentsPortal-EMC
+Total Fund - Investments Portal - EMC Dashboard
+EDP-EDW
+SE-JIRA
+EC-Connections
+TE-BI-SSIS
+TE-BI-NLP
+Natural Language Processing
+SE-AngularJS
+TE-BI-TIBCO-StreamBase
+PMER-DS
+PMER-DPRS
+PMER-DA
+PMER Data Administration
+EC-ReportRegistry
+TE-BI-Sandbox
+BOR-CashReplacement
+TF-InvestmentsPortal-IDLC
+Total Fund - Investments Portal - IDLC Dashboard
+TE-BI-CI-SandBox
+DevOps
+EC-TAXOS
+Trade-Efficiencies-CRD
+Trade-Efficiencies-Findur
+EC-ProxyVoting
+EDP-EDW-Oracle
+EDP-EDW-SSIS
+TF-InvestmentsPortal-IDCC
+Total Fund - Investments Portal - IDCC Dashboard
+TE-BI-Prime-Broker
+TE-BI-SSRS
+TE-BI-Continuous-Integration-Framework
+EC-ACE
+EC-eSearch
+Enterprise Search
+EC-Sharepoint
+EC-PORTAL-8
+TE-BI-One-PnL
+Trade-Efficiencies-Common
+Investment-IT-Architecture
+Trade-Efficiencies-TS
+Enterprise-Collaboration
+github-enterprise

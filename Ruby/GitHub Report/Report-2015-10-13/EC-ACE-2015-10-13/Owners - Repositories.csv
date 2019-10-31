@@ -1,0 +1,9 @@
+repo_name, access
+EC-ACE/BORTest, admin
+EC-ACE/DirectoryIntegration, admin
+EC-ACE/DirectoryIntegrationTestPanel, admin
+EC-ACE/DirectoryServices, admin
+EC-ACE/EMDEntitySPList, admin
+EC-ACE/ExchangeCalendarsService, admin
+EC-ACE/testACE, admin
+EC-ACE/testing, admin

@@ -1,0 +1,9 @@
+repo_name, access
+EC-eSearch/ConnectionsIndexingService, admin
+EC-eSearch/EID.Endeca.Update.Process, admin
+EC-eSearch/Endeca-ETL_Graphs, admin
+EC-eSearch/EndecaUtilityService, admin
+EC-eSearch/LookupListSyncService, admin
+EC-eSearch/Record.Update.Process, admin
+EC-eSearch/Search.Service, admin
+EC-eSearch/Search.ServiceV2, admin
