@@ -1,8 +1,9 @@
 node {
-      stage("checkout") {
-        git url: 'https://github.com/hujirong/DevOps.git'
-      }
-
+       stage('Checkout code') {
+        steps {
+            checkout scm
+        }
+       }
       stage("last-changes") {
         def publisher = LastChanges.getLastChangesPublisher "LAST_SUCCESSFUL_BUILD", "SIDE", "LINE", true, true, "", "", "", "", ""
               publisher.publishLastChanges()
