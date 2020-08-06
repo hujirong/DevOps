@@ -1,37 +1,20 @@
-// -*- mode: groovy -*-
-// vim: set filetype=groovy :
-
-node( 'master' ) {
-  stage( "Phase 1" ) {
-    sshagent( credentials: [ 'hujirong' ] ) {
-      checkout scm
-      def lastSuccessfulCommit = getLastSuccessfulCommit()
-      def currentCommit = commitHashForBuild( currentBuild.rawBuild )
-      if (lastSuccessfulCommit) {
-        commits = sh(
-          script: "git rev-list $currentCommit \"^$lastSuccessfulCommit\"",
-          returnStdout: true
-        ).split('\n')
-        println "Commits are: $commits"
+node {
+      stage("checkout") {
+        git url: 'https://github.com/hujirong/DevOps.git'
       }
-    }
-  }
-}
 
-def getLastSuccessfulCommit() {
-  def lastSuccessfulHash = null
-  def lastSuccessfulBuild = currentBuild.rawBuild.getPreviousSuccessfulBuild()
-  if ( lastSuccessfulBuild ) {
-    lastSuccessfulHash = commitHashForBuild( lastSuccessfulBuild )
-  }
-  return lastSuccessfulHash
-}
+      stage("last-changes") {
+        def publisher = LastChanges.getLastChangesPublisher "LAST_SUCCESSFUL_BUILD", "SIDE", "LINE", true, true, "", "", "", "", ""
+              publisher.publishLastChanges()
+              def changes = publisher.getLastChanges()
+              println(changes.getEscapedDiff())
+              for (commit in changes.getCommits()) {
+                  println(commit)
+                  def commitInfo = commit.getCommitInfo()
+                  println(commitInfo)
+                  println(commitInfo.getCommitMessage())
+                  println(commit.getChanges())
+              }
+      }
 
-/**
- * Gets the commit hash from a Jenkins build object, if any
- */
-@NonCPS
-def commitHashForBuild( build ) {
-  def scmAction = build?.actions.find { action -> action instanceof jenkins.scm.api.SCMRevisionAction }
-  return scmAction?.revision?.hash
 }
